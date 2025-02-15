@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Button, Grid } from '@mui/material';
+import { Box, Container, Typography, Button, Grid, useTheme, useMediaQuery } from '@mui/material';
 import { motion } from 'framer-motion';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -9,6 +9,9 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import MyPhoto from '../assets/my_photo.jpg';
 
 const Hero = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <Box
       sx={{
@@ -17,11 +20,17 @@ const Hero = () => {
         display: 'flex',
         alignItems: 'center',
         background: 'linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%)',
-        pt: { xs: 10, md: 0 },
+        pt: { xs: 8, md: 0 },
+        pb: { xs: 4, md: 0 },
       }}
     >
       <Container maxWidth="lg">
-        <Grid container spacing={4} alignItems="center">
+        <Grid 
+          container 
+          spacing={4} 
+          alignItems="center"
+          direction={isMobile ? 'column-reverse' : 'row'}
+        >
           <Grid item xs={12} md={6}>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -31,9 +40,10 @@ const Hero = () => {
               <Typography
                 variant="h1"
                 sx={{
-                  fontSize: { xs: '2.5rem', md: '3.5rem' },
+                  fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' },
                   fontWeight: 700,
                   mb: 2,
+                  textAlign: { xs: 'center', md: 'left' },
                   background: 'linear-gradient(45deg, #000000 30%, #666666 90%)',
                   backgroundClip: 'text',
                   textFillColor: 'transparent',
@@ -46,10 +56,11 @@ const Hero = () => {
               <Typography
                 variant="h2"
                 sx={{
-                  fontSize: { xs: '1.5rem', md: '2rem' },
+                  fontSize: { xs: '1.25rem', sm: '1.5rem', md: '2rem' },
                   fontWeight: 500,
                   mb: 3,
                   color: '#666',
+                  textAlign: { xs: 'center', md: 'left' },
                 }}
               >
                 Data Analyst & Machine Learning Enthusiast
@@ -57,16 +68,26 @@ const Hero = () => {
               <Typography
                 variant="body1"
                 sx={{
-                  fontSize: '1.1rem',
+                  fontSize: { xs: '1rem', md: '1.1rem' },
                   mb: 4,
                   color: '#333',
                   maxWidth: '600px',
                   lineHeight: 1.8,
+                  textAlign: { xs: 'center', md: 'left' },
+                  mx: { xs: 'auto', md: 0 },
                 }}
               >
                 Fresh Computer Science graduate with a passion for transforming data into actionable insights. Specialized in data analysis, machine learning, and creating impactful visualizations.
               </Typography>
-              <Box sx={{ display: 'flex', gap: 2, mb: 4 }}>
+              <Box 
+                sx={{ 
+                  display: 'flex', 
+                  gap: 2, 
+                  mb: 4,
+                  justifyContent: { xs: 'center', md: 'flex-start' },
+                  flexWrap: 'wrap'
+                }}
+              >
                 <Button
                   variant="contained"
                   href="https://github.com/minkhantsoeoke"
@@ -104,7 +125,14 @@ const Hero = () => {
                   Kaggle
                 </Button>
               </Box>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <Box 
+                sx={{ 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  gap: 1,
+                  alignItems: { xs: 'center', md: 'flex-start' }
+                }}
+              >
                 <Typography
                   variant="body1"
                   sx={{
@@ -130,7 +158,14 @@ const Hero = () => {
               </Box>
             </motion.div>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid 
+            item 
+            xs={12} 
+            md={6}
+            sx={{
+              mb: { xs: 4, md: 0 }
+            }}
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -146,15 +181,15 @@ const Hero = () => {
                 src={MyPhoto}
                 alt="Min Khant Soe Oke"
                 sx={{
-                  width: '100%',
+                  width: { xs: '280px', sm: '320px', md: '100%' },
                   maxWidth: '400px',
                   height: 'auto',
                   borderRadius: '20px',
                   boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
-                  transform: 'perspective(1000px) rotateY(-5deg)',
+                  transform: { xs: 'none', md: 'perspective(1000px) rotateY(-5deg)' },
                   transition: 'transform 0.3s ease-in-out',
                   '&:hover': {
-                    transform: 'perspective(1000px) rotateY(0deg)',
+                    transform: { xs: 'none', md: 'perspective(1000px) rotateY(0deg)' },
                   },
                 }}
               />
