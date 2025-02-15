@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css'
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
