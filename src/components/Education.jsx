@@ -82,9 +82,15 @@ const Education = () => {
               </Typography>
               <Typography
                 variant="subtitle1"
-                sx={{ color: '#888', mb: 2 }}
+                sx={{ color: '#888', mb: 1 }}
               >
                 October 2021 - February 2025
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                sx={{ color: '#888', mb: 2 }}
+              >
+                Krakow, Poland 🇵🇱
               </Typography>
               <Box sx={{ mb: 2 }}>
                 <Typography

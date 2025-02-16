@@ -107,7 +107,7 @@ const Experience = () => {
                           variant="h6"
                           sx={{ color: '#666', mb: 1 }}
                         >
-                          {exp.company}
+                          {exp.company} {exp.company === 'AGH University of Science and Technology' ? '• Krakow, Poland 🇵🇱' : '• Remote 🌐'}
                         </Typography>
                         <Typography
                           variant="subtitle1"
