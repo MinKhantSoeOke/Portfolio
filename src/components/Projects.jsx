@@ -2,6 +2,8 @@ import React from 'react';
 import { Box, Container, Typography, Paper, Grid } from '@mui/material';
 import { motion } from 'framer-motion';
 import AGHLogo from '../assets/AGH_logo.png';
+import PedestrianDetection from '../assets/pedestrian_detection.jpeg';
+import TravelItinerary from '../assets/travel_itinerary.png';
 
 const Projects = () => {
   const projects = [
@@ -11,6 +13,13 @@ const Projects = () => {
       organization: 'AGH University of Science and Technology',
       description: 'Conducted research on quality of Dynamic Vision Sensors (DVS) and RGB cameras for low-latency object detection in autonomous vehicles. Developed synthetic AEDAT datasets using v2e software and evaluated their quality through metrics such as Mean Squared Error (MSE), Structural Similarity Index (SSIM), polarity accuracy, and temporal precision. This work improved dataset reliability and enhanced model performance by optimizing event-based data processing pipelines.',
       skills: ['Dataset Quality Verification', 'Event-based Vision', 'Low-latency Object Detection', 'Verification Metrics', 'Data Visualization']
+    },
+    {
+      title: 'Crowdsourced Travel Itinerary Site',
+      period: 'Oct 2024 - Dec 2024',
+      organization: 'AGH University of Science and Technology',
+      description: 'Developed a collaborative platform for travellers to crowdsource and customize travel itineraries. Designed an intuitive user interface using Figma, focusing on seamless user experience for itinerary creation and sharing. Implemented features for real-time itinerary updates, voting, commenting and recommendations. Optimized design for accessibility and cross-device compatibility to enhance engagement and usability.',
+      skills: ['Figma', 'UI/UX Design', 'Collaborative Platforms', 'Real-Time Features']
     }
   ];
 
@@ -62,7 +71,7 @@ const Projects = () => {
                   <Paper
                     elevation={0}
                     sx={{
-                      p: 4,
+                      p: { xs: 3, md: 4 },
                       borderRadius: 4,
                       background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
                       backdropFilter: 'blur(10px)',
@@ -71,75 +80,109 @@ const Projects = () => {
                       transition: 'transform 0.3s ease-in-out',
                       '&:hover': {
                         transform: 'translateY(-5px)'
-                      }
+                      },
+                      display: 'flex',
+                      flexDirection: { xs: 'column', md: 'row' },
+                      gap: { xs: 3, md: 4 }
                     }}
                   >
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                      <img
-                        src={AGHLogo}
-                        alt="AGH University Logo"
-                        style={{ height: '50px', marginRight: '16px' }}
-                      />
-                      <Typography
-                        variant="h5"
-                        sx={{ fontWeight: 600 }}
-                      >
-                        {project.title}
-                      </Typography>
-                    </Box>
-                    <Typography
-                      variant="subtitle1"
-                      component="a"
-                      href="https://www.agh.edu.pl/"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Box
                       sx={{
-                        color: '#1270ce',
-                        mb: 1,
-                        textDecoration: 'none',
-                        '&:hover': {
-                          color: '#0d47a1',
-                        },
+                        width: { xs: '100%', md: '300px' },
+                        height: { xs: '200px', md: '300px' },
+                        flexShrink: 0,
+                        borderRadius: 2,
+                        overflow: 'hidden',
+                        boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
                       }}
                     >
-                      {project.organization}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: '#888', mb: 3 }}
-                    >
-                      {project.period}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      sx={{ color: '#333', mb: 3, lineHeight: 1.8 }}
-                    >
-                      {project.description}
-                    </Typography>
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                      {project.skills.map((skill, i) => (
-                        <Paper
-                          key={i}
-                          elevation={0}
+                      <img
+                        src={index === 0 ? PedestrianDetection : TravelItinerary}
+                        alt={index === 0 ? "Pedestrian Detection" : "Travel Itinerary"}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover'
+                        }}
+                      />
+                    </Box>
+                    <Box sx={{ flex: 1 }}>
+                      <Box sx={{
+                        display: 'flex',
+                        alignItems: { xs: 'flex-start', md: 'center' },
+                        flexDirection: { xs: 'column', md: 'row' },
+                        mb: 2,
+                        gap: { xs: 1, md: 2 }
+                      }}>
+                        <img
+                          src={AGHLogo}
+                          alt="AGH University Logo"
+                          style={{ height: '40px' }}
+                        />
+                        <Typography
+                          variant="h5"
                           sx={{
-                            px: 2,
-                            py: 1,
-                            borderRadius: 2,
-                            backgroundColor: 'rgba(0, 0, 0, 0.04)',
-                            color: '#666',
-                            transition: 'all 0.3s ease-in-out',
-                            '&:hover': {
-                              backgroundColor: 'rgba(0, 0, 0, 0.08)',
-                              transform: 'translateY(-2px)',
-                              boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                            },
+                            fontWeight: 600,
+                            fontSize: { xs: '1.25rem', md: '1.5rem' }
                           }}
                         >
-                          <Typography variant="body2">
-                            {skill}
-                          </Typography>
-                        </Paper>
-                      ))}
+                          {project.title}
+                        </Typography>
+                      </Box>
+                      <Typography
+                        variant="subtitle1"
+                        component="a"
+                        href="https://www.agh.edu.pl/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          color: '#1270ce',
+                          mb: 1,
+                          textDecoration: 'none',
+                          '&:hover': {
+                            color: '#0d47a1',
+                          },
+                        }}
+                      >
+                        {project.organization}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: '#888', mb: 3 }}
+                      >
+                        {project.period}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        sx={{ color: '#333', mb: 3, lineHeight: 1.8 }}
+                      >
+                        {project.description}
+                      </Typography>
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                        {project.skills.map((skill, i) => (
+                          <Paper
+                            key={i}
+                            elevation={0}
+                            sx={{
+                              px: 2,
+                              py: 1,
+                              borderRadius: 2,
+                              backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                              color: '#666',
+                              transition: 'all 0.3s ease-in-out',
+                              '&:hover': {
+                                backgroundColor: 'rgba(0, 0, 0, 0.08)',
+                                transform: 'translateY(-2px)',
+                                boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                              },
+                            }}
+                          >
+                            <Typography variant="body2">
+                              {skill}
+                            </Typography>
+                          </Paper>
+                        ))}
+                      </Box>
                     </Box>
                   </Paper>
                 </motion.div>
