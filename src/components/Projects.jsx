@@ -114,10 +114,24 @@ const Projects = () => {
                         mb: 2,
                         gap: { xs: 1, md: 2 }
                       }}>
-                        <img
+                        <motion.img
                           src={AGHLogo}
                           alt="AGH University Logo"
-                          style={{ height: '40px' }}
+                          whileHover={{ 
+                            scale: 1.1,
+                            rotate: 5,
+                            filter: 'drop-shadow(0 8px 8px rgba(0,0,0,0.2))'
+                          }}
+                          transition={{ 
+                            type: 'spring',
+                            stiffness: 300,
+                            damping: 15
+                          }}
+                          style={{ 
+                            height: '40px',
+                            objectFit: 'contain',
+                            cursor: 'pointer'
+                          }}
                         />
                         <Typography
                           variant="h5"

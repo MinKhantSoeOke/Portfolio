@@ -90,10 +90,25 @@ const Experience = () => {
                   >
                     <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
                       {exp.company === 'AGH University of Science and Technology' && (
-                        <img
+                        <motion.img
                           src={AGHLogo}
                           alt="AGH University Logo"
-                          style={{ height: '50px', marginRight: '16px', objectFit: 'contain' }}
+                          whileHover={{ 
+                            scale: 1.1,
+                            rotate: 5,
+                            filter: 'drop-shadow(0 8px 8px rgba(0,0,0,0.2))'
+                          }}
+                          transition={{ 
+                            type: 'spring',
+                            stiffness: 300,
+                            damping: 15
+                          }}
+                          style={{ 
+                            height: '50px', 
+                            marginRight: '16px', 
+                            objectFit: 'contain',
+                            cursor: 'pointer'
+                          }}
                         />
                       )}
                       <Box sx={{ flex: 1 }}>

@@ -79,7 +79,91 @@ const Contact = () => {
 
               <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 3, justifyContent: 'center' }}>
                 <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, flex: 1, justifyContent: 'center' }}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>                      <EmailIcon sx={{ fontSize: 24, color: '#666' }} />                      <Typography variant="h6" sx={{ fontWeight: 600, color: '#333' }}>                        Email                      </Typography>                    </Box>                    <Typography variant="body1" sx={{ color: '#666', textAlign: 'center' }}>                      alexminkhant007@gmail.com                    </Typography>                    <Button                      variant="outlined"                      startIcon={<LaunchIcon />}                      href="mailto:alexminkhant007@gmail.com"                      sx={{                        borderColor: '#666',                        color: '#666',                        '&:hover': {                          borderColor: '#333',                          color: '#333',                          backgroundColor: 'rgba(0, 0, 0, 0.04)',                        },                      }}                    >                      Send Email                    </Button>                  </Box>                </Box>                <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, flex: 1, justifyContent: 'center' }}>                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>                      <PhoneIcon sx={{ fontSize: 24, color: '#666' }} />                      <Typography variant="h6" sx={{ fontWeight: 600, color: '#333' }}>                        Phone                      </Typography>                    </Box>                    <Typography variant="body1" sx={{ color: '#666', textAlign: 'center' }}>                      +48 572 581 007                    </Typography>                    <Button                      variant="outlined"                      startIcon={<LaunchIcon />}                      href="tel:+48572581007"                      sx={{                        borderColor: '#666',                        color: '#666',                        '&:hover': {                          borderColor: '#333',                          color: '#333',                          backgroundColor: 'rgba(0, 0, 0, 0.04)',                        },                      }}                    >                      Call Now                    </Button>                  </Box>                </Box>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <motion.div
+                        whileHover={{ 
+                          scale: 1.1,
+                          rotate: 5,
+                          filter: 'drop-shadow(0 8px 8px rgba(0,0,0,0.2))'
+                        }}
+                        transition={{ 
+                          type: 'spring',
+                          stiffness: 300,
+                          damping: 15
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <EmailIcon sx={{ fontSize: 24, color: '#666' }} />
+                      </motion.div>
+                      <Typography variant="h6" sx={{ fontWeight: 600, color: '#333' }}>
+                        Email
+                      </Typography>
+                    </Box>
+                    <Typography variant="body1" sx={{ color: '#666', textAlign: 'center' }}>
+                      alexminkhant007@gmail.com
+                    </Typography>
+                    <Button
+                      variant="outlined"
+                      startIcon={<LaunchIcon />}
+                      href="mailto:alexminkhant007@gmail.com"
+                      sx={{
+                        borderColor: '#666',
+                        color: '#666',
+                        '&:hover': {
+                          borderColor: '#333',
+                          color: '#333',
+                          backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                        },
+                      }}
+                    >
+                      Send Email
+                    </Button>
+                  </Box>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, flex: 1, justifyContent: 'center' }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <motion.div
+                        whileHover={{ 
+                          scale: 1.1,
+                          rotate: 5,
+                          filter: 'drop-shadow(0 8px 8px rgba(0,0,0,0.2))'
+                        }}
+                        transition={{ 
+                          type: 'spring',
+                          stiffness: 300,
+                          damping: 15
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <PhoneIcon sx={{ fontSize: 24, color: '#666' }} />
+                      </motion.div>
+                      <Typography variant="h6" sx={{ fontWeight: 600, color: '#333' }}>
+                        Phone
+                      </Typography>
+                    </Box>
+                    <Typography variant="body1" sx={{ color: '#666', textAlign: 'center' }}>
+                      +48 572 581 007
+                    </Typography>
+                    <Button
+                      variant="outlined"
+                      startIcon={<LaunchIcon />}
+                      href="tel:+48572581007"
+                      sx={{
+                        borderColor: '#666',
+                        color: '#666',
+                        '&:hover': {
+                          borderColor: '#333',
+                          color: '#333',
+                          backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                        },
+                      }}
+                    >
+                      Call Now
+                    </Button>
+                  </Box>
+                </Box>
               </Box>
             </Paper>
           </motion.div>

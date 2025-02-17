@@ -95,10 +95,26 @@ const Certifications = () => {
                       }
                     }}
                   >
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>                      <img
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                      <motion.img
                         src={GoogleLogo}
                         alt="Google Logo"
-                        style={{ height: '30px', marginRight: '16px', display: 'block' }}
+                        whileHover={{ 
+                          scale: 1.1,
+                          rotate: 5,
+                          filter: 'drop-shadow(0 8px 8px rgba(0,0,0,0.2))'
+                        }}
+                        transition={{ 
+                          type: 'spring',
+                          stiffness: 300,
+                          damping: 15
+                        }}
+                        style={{ 
+                          height: '30px', 
+                          marginRight: '16px', 
+                          objectFit: 'contain',
+                          cursor: 'pointer'
+                        }}
                       />
                       <Typography
                         variant="h5"
