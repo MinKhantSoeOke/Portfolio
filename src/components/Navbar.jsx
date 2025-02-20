@@ -214,7 +214,7 @@ const Navbar = () => {
         sx={{
           '& .MuiDrawer-paper': {
             width: 260,
-            height: '100%',
+            height: '60%',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-start',

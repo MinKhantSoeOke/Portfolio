@@ -20,12 +20,18 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+          cache: 'npm'
+
+      - name: Clear npm cache
+        run: npm cache clean --force
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build project
-        run: npm run build
+        run: |
+          rm -rf dist
+          npm run build
         env:
           VITE_BASE_URL: '/Portfolio'
 
@@ -38,3 +44,5 @@ jobs:
           branch: gh-pages
           folder: dist
           clean: true
+          clean-exclude: |
+            .nojekyll
