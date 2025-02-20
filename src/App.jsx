@@ -82,7 +82,7 @@ function App() {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <Router basename="/Portfolio">
+      <Router>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Box
