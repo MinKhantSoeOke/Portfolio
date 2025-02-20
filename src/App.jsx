@@ -97,6 +97,7 @@ function App() {
             <Routes>
               <Route path="/" element={<MainContent />} />
               <Route path="/my-story" element={<MyStory />} />
+              <Route path="/Portfolio" element={<MainContent />} />
             </Routes>
           </Box>
         </ThemeProvider>
