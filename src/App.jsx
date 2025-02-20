@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import './App.css'
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -82,7 +82,7 @@ function App() {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <Router>
+      <HashRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Box
@@ -100,7 +100,7 @@ function App() {
             </Routes>
           </Box>
         </ThemeProvider>
-      </Router>
+      </HashRouter>
     </ColorModeContext.Provider>
   );
 }

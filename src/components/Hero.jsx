@@ -160,28 +160,44 @@ const Hero = () => {
                   alignItems: { xs: 'center', md: 'flex-start' }
                 }}
               >
-                <Typography
-                  variant="body1"
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1,
-                    color: theme.palette.text.secondary,
-                  }}
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: theme.palette.text.secondary }}
                 >
-                  <EmailIcon /> alexminkhant007@gmail.com
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1,
-                    color: theme.palette.text.secondary,
-                  }}
+                  <motion.div
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotate: 5,
+                      filter: 'drop-shadow(0 8px 8px rgba(0,0,0,0.2))'
+                    }}
+                    transition={{ 
+                      type: 'spring',
+                      stiffness: 300,
+                      damping: 15
+                    }}
+                    style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                  >
+                    <EmailIcon />
+                  </motion.div>
+                  alexminkhant007@gmail.com
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: theme.palette.text.secondary }}
                 >
-                  <PhoneIcon /> +48 572 581 007
-                </Typography>
+                  <motion.div
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotate: 5,
+                      filter: 'drop-shadow(0 8px 8px rgba(0,0,0,0.2))'
+                    }}
+                    transition={{ 
+                      type: 'spring',
+                      stiffness: 300,
+                      damping: 15
+                    }}
+                    style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                  >
+                    <PhoneIcon />
+                  </motion.div>
+                  +48 572 581 007
+                </Box>
               </Box>
             </motion.div>
           </Grid>

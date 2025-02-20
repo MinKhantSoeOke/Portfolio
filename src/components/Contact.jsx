@@ -103,7 +103,7 @@ const Contact = () => {
                           stiffness: 300,
                           damping: 15
                         }}
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
                       >
                         <EmailIcon sx={{ fontSize: 24, color: theme.palette.text.primary }} />
                       </motion.div>
@@ -146,7 +146,7 @@ const Contact = () => {
                           stiffness: 300,
                           damping: 15
                         }}
-                        style={{ cursor: 'pointer' }}
+                        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
                       >
                         <PhoneIcon sx={{ fontSize: 24, color: theme.palette.text.primary }} />
                       </motion.div>
