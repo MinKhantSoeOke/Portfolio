@@ -25,6 +25,16 @@ jobs:
       - name: Clear npm cache
         run: npm cache clean --force
 
+      - name: Clear GitHub Actions cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
         run: npm ci
 
@@ -32,6 +42,7 @@ jobs:
         run: |
           rm -rf dist
           npm run build
+          touch dist/.nojekyll
         env:
           VITE_BASE_URL: '/Portfolio'
 
@@ -46,3 +57,4 @@ jobs:
           clean: true
           clean-exclude: |
             .nojekyll
+            CNAME
