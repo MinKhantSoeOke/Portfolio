@@ -213,18 +213,18 @@ const Navbar = () => {
         onClose={handleDrawerToggle}
         sx={{
           '& .MuiDrawer-paper': {
-            width: 280,
-            height: '100%',
+            width: 260,
+            height: '60%',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-between',
-            overflow: 'hidden',
+            justifyContent: 'flex-start',
+            overflow: 'auto',
             background: theme.palette.mode === 'dark' ? 'rgba(30, 30, 30, 0.95)' : 'rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(10px)',
           },
         }}
       >
-        <List sx={{ pt: 8 }}>
+        <List sx={{ pt: 8, height: '100%', display: 'flex', flexDirection: 'column' }}>
           {navItems.map((item) => (
             <ListItem key={item.title} sx={{ p: 0 }}>
               {item.path ? (
@@ -294,9 +294,15 @@ const Navbar = () => {
               )}
             </ListItem>
           ))}
-          <Box sx={{ flex: 1 }} /> {/* Spacer */}
+          <Box sx={{ flexGrow: 1 }} />
           <ListItem sx={{ 
-            borderTop: 1, borderColor: 'divider', p: 2, bgcolor: 'background.paper' 
+            p: 2,
+            borderTop: 1,
+            borderColor: 'divider',
+            bgcolor: 'background.paper',
+            position: 'sticky',
+            bottom: 0,
+            zIndex: 1
           }}>
             <ColorModeContext.Consumer>
               {({ toggleColorMode }) => (
