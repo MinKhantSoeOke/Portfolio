@@ -9,52 +9,14 @@ permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - run: npm install && npm run build
+      - uses: peaceiris/actions-gh-pages@v3
         with:
-          node-version: '18'
-          cache: 'npm'
-
-      - name: Clear npm cache
-        run: npm cache clean --force
-
-      - name: Clear GitHub Actions cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.npm
-            node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build project
-        run: |
-          rm -rf dist
-          npm run build
-          touch dist/.nojekyll
-        env:
-          VITE_BASE_URL: '/Portfolio'
-
-      - name: Create 404.html
-        run: cp dist/index.html dist/404.html
-
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: dist
-          clean: true
-          clean-exclude: |
-            .nojekyll
-            CNAME
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist  # Update this to your build directory
+          enable_jekyll: false
+          cname: minkhantsoeoke.github.io

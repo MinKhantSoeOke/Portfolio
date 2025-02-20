@@ -82,7 +82,7 @@ function App() {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <HashRouter>
+      <HashRouter basename="/">
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Box
@@ -96,7 +96,7 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<MainContent />} />
-              <Route path="/my-story" element={<MyStory />} />
+              <Route path="my-story" element={<MyStory />} />
             </Routes>
           </Box>
         </ThemeProvider>
