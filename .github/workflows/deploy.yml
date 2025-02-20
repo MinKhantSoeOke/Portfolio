@@ -2,39 +2,36 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  build-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Setup Node
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build project
-      run: npm run build
+      - name: Build project
+        run: npm run build
+        env:
+          VITE_BASE_URL: '/Portfolio'
 
-    - name: Add 404.html
-      run: cp public/404.html dist/
+      - name: Create 404.html
+        run: cp dist/index.html dist/404.html
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
-        keep_files: true
-        enable_jekyll: false
-        cname: minkhantsoeoke.github.io/Portfolio
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
+          clean: true

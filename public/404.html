@@ -4,9 +4,30 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script>
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+    <script>
       const segment = 1;
       const redirect = location.pathname.split('/').slice(0, 1 + segment).join('/');
-      location.replace(location.origin + '/Portfolio/#' + redirect);
+      location.replace(
+        location.origin + 
+        '/Portfolio/#' + 
+        (location.pathname.replace('/Portfolio/', '') || '') +
+        location.search +
+        location.hash
+      );
     </script>
   </head>
   <body>
