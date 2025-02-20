@@ -4,8 +4,11 @@ import { motion } from 'framer-motion';
 import AGHLogo from '../assets/AGH_logo.png';
 import PedestrianDetection from '../assets/pedestrian_detection.jpeg';
 import TravelItinerary from '../assets/travel_itinerary.png';
+import { useTheme } from '@mui/material/styles';
 
 const Projects = () => {
+  const theme = useTheme();
+
   const projects = [
     {
       title: 'Low-Latency Object Detection in Autonomous Vehicles using DVS and RGB camera',
@@ -31,8 +34,8 @@ const Projects = () => {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%)',
-        py: 12,
+        background: 'transparent',
+        py: 8,
       }}
     >
       <Container maxWidth="lg">
@@ -49,7 +52,9 @@ const Projects = () => {
               mb: 6,
               fontWeight: 700,
               textAlign: 'center',
-              background: 'linear-gradient(45deg, #000000 30%, #666666 90%)',
+              background: theme.palette.mode === 'dark'
+                ? 'linear-gradient(45deg, #90caf9 30%, #f48fb1 90%)'
+                : 'linear-gradient(45deg, #000000 30%, #666666 90%)',
               backgroundClip: 'text',
               textFillColor: 'transparent',
               WebkitBackgroundClip: 'text',
@@ -73,10 +78,14 @@ const Projects = () => {
                     sx={{
                       p: { xs: 3, md: 4 },
                       borderRadius: 4,
-                      background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
+                      backgroundColor: theme.palette.background.paper,
                       backdropFilter: 'blur(10px)',
-                      border: '1px solid rgba(255, 255, 255, 0.6)',
-                      boxShadow: '15px 15px 30px #d1d1d1, -15px -15px 30px #ffffff',
+                      border: theme.palette.mode === 'dark'
+                        ? '1px solid rgba(255, 255, 255, 0.1)'
+                        : '1px solid rgba(255, 255, 255, 0.6)',
+                      boxShadow: theme.palette.mode === 'dark'
+                        ? '10px 10px 30px rgba(209,209,209,0.05), -10px -10px 30px rgba(255,255,255,0.01)'
+                        : '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
                       transition: 'transform 0.3s ease-in-out',
                       '&:hover': {
                         transform: 'translateY(-5px)'
@@ -114,30 +123,42 @@ const Projects = () => {
                         mb: 2,
                         gap: { xs: 1, md: 2 }
                       }}>
-                        <motion.img
-                          src={AGHLogo}
-                          alt="AGH University Logo"
-                          whileHover={{ 
-                            scale: 1.1,
-                            rotate: 5,
-                            filter: 'drop-shadow(0 8px 8px rgba(0,0,0,0.2))'
-                          }}
-                          transition={{ 
-                            type: 'spring',
-                            stiffness: 300,
-                            damping: 15
-                          }}
-                          style={{ 
-                            height: '40px',
-                            objectFit: 'contain',
-                            cursor: 'pointer'
-                          }}
-                        />
+                        <motion.div
+                          initial={{ scale: 0.8, rotate: -10 }}
+                          animate={{ scale: 1, rotate: 0 }}
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                          style={{ display: 'inline-block', cursor: 'pointer' }}
+                        >
+                          <Box
+                            sx={{
+                              width: '50px',
+                              height: '50px',
+                              borderRadius: '50%',
+                              backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : 'transparent',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              boxShadow: theme.palette.mode === 'dark'
+                                ? '0px 4px 12px rgba(0,0,0,0.2)'
+                                : 'none',
+                              transition: 'all 0.3s ease-in-out',
+                              mr: 2
+                            }}
+                          >
+                            <img
+                              src={AGHLogo}
+                              alt="AGH University Logo"
+                              style={{ height: '40px', objectFit: 'contain' }}
+                            />
+                          </Box>
+                        </motion.div>
                         <Typography
                           variant="h5"
                           sx={{
                             fontWeight: 600,
-                            fontSize: { xs: '1.25rem', md: '1.5rem' }
+                            fontSize: { xs: '1.25rem', md: '1.5rem' },
+                            color: theme.palette.text.primary
                           }}
                         >
                           {project.title}
@@ -162,13 +183,13 @@ const Projects = () => {
                       </Typography>
                       <Typography
                         variant="body2"
-                        sx={{ color: '#888', mb: 3 }}
+                        sx={{ color: theme.palette.text.secondary, mb: 3 }}
                       >
                         {project.period}
                       </Typography>
                       <Typography
                         variant="body1"
-                        sx={{ color: '#333', mb: 3, lineHeight: 1.8 }}
+                        sx={{ color: theme.palette.text.primary, mb: 3, lineHeight: 1.8 }}
                       >
                         {project.description}
                       </Typography>
@@ -181,13 +202,19 @@ const Projects = () => {
                               px: 2,
                               py: 1,
                               borderRadius: 2,
-                              backgroundColor: 'rgba(0, 0, 0, 0.04)',
-                              color: '#666',
+                              backgroundColor: theme.palette.mode === 'dark'
+                                ? 'rgba(255, 255, 255, 0.08)'
+                                : 'rgba(0, 0, 0, 0.04)',
+                              color: theme.palette.text.secondary,
                               transition: 'all 0.3s ease-in-out',
                               '&:hover': {
-                                backgroundColor: 'rgba(0, 0, 0, 0.08)',
+                                backgroundColor: theme.palette.mode === 'dark'
+                                  ? 'rgba(255, 255, 255, 0.15)'
+                                  : 'rgba(0, 0, 0, 0.08)',
                                 transform: 'translateY(-2px)',
-                                boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                                boxShadow: theme.palette.mode === 'dark'
+                                  ? '0 4px 8px rgba(0,0,0,0.3)'
+                                  : '0 4px 8px rgba(0,0,0,0.1)',
                               },
                             }}
                           >

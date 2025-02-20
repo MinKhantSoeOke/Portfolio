@@ -2,8 +2,11 @@ import React from 'react';
 import { Box, Container, Typography, Paper, Grid } from '@mui/material';
 import { motion } from 'framer-motion';
 import AGHLogo from '../assets/AGH_logo.png';
+import { useTheme } from '@mui/material/styles';
 
 const Experience = () => {
+  const theme = useTheme();
+
   const experiences = [
     {
       title: 'Machine Learning Research (Intern)',
@@ -36,8 +39,8 @@ const Experience = () => {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%)',
-        py: 12,
+        background: 'transparent',
+        py: 8,
       }}
     >
       <Container maxWidth="lg">
@@ -54,7 +57,9 @@ const Experience = () => {
               mb: 6,
               fontWeight: 700,
               textAlign: 'center',
-              background: 'linear-gradient(45deg, #000000 30%, #666666 90%)',
+              background: theme.palette.mode === 'dark'
+                ? 'linear-gradient(45deg, #90caf9 30%, #f48fb1 90%)'
+                : 'linear-gradient(45deg, #000000 30%, #666666 90%)',
               backgroundClip: 'text',
               textFillColor: 'transparent',
               WebkitBackgroundClip: 'text',
@@ -78,10 +83,14 @@ const Experience = () => {
                     sx={{
                       p: 4,
                       borderRadius: 4,
-                      background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
+                      background: theme.palette.background.paper,
                       backdropFilter: 'blur(10px)',
-                      border: '1px solid rgba(255, 255, 255, 0.6)',
-                      boxShadow: '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
+                      border: theme.palette.mode === 'dark'
+                        ? '1px solid rgba(255, 255, 255, 0.1)'
+                        : '1px solid rgba(255, 255, 255, 0.6)',
+                      boxShadow: theme.palette.mode === 'dark'
+                        ? '10px 10px 30px rgba(209,209,209,0.05), -10px -10px 30px rgba(255,255,255,0.01)'
+                        : '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
                       transition: 'transform 0.3s ease-in-out',
                       '&:hover': {
                         transform: 'translateY(-5px)'
@@ -90,43 +99,50 @@ const Experience = () => {
                   >
                     <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
                       {exp.company === 'AGH University of Science and Technology' && (
-                        <motion.img
-                          src={AGHLogo}
-                          alt="AGH University Logo"
-                          whileHover={{ 
-                            scale: 1.1,
-                            rotate: 5,
-                            filter: 'drop-shadow(0 8px 8px rgba(0,0,0,0.2))'
-                          }}
-                          transition={{ 
-                            type: 'spring',
-                            stiffness: 300,
-                            damping: 15
-                          }}
-                          style={{ 
-                            height: '50px', 
-                            marginRight: '16px', 
-                            objectFit: 'contain',
-                            cursor: 'pointer'
-                          }}
-                        />
+                        <motion.div
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                          style={{ display: 'inline-block', marginRight: '16px', cursor: 'pointer' }}
+                        >
+                          <Box
+                            sx={{
+                              width: '50px',
+                              height: '50px',
+                              borderRadius: '50%',
+                              backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : 'transparent',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              boxShadow: theme.palette.mode === 'dark'
+                                ? '0px 4px 12px rgba(0,0,0,0.2)'
+                                : 'none',
+                              transition: 'all 0.3s ease-in-out'
+                            }}
+                          >
+                            <img
+                              src={AGHLogo}
+                              alt="AGH University Logo"
+                              style={{ height: '40px', objectFit: 'contain' }}
+                            />
+                          </Box>
+                        </motion.div>
                       )}
                       <Box sx={{ flex: 1 }}>
                         <Typography
                           variant="h5"
-                          sx={{ fontWeight: 600, mb: 1 }}
+                          sx={{ fontWeight: 600, mb: 1, color: theme.palette.text.primary }}
                         >
                           {exp.title}
                         </Typography>
                         <Typography
                           variant="h6"
-                          sx={{ color: '#666', mb: 1 }}
+                          sx={{ color: theme.palette.text.secondary, mb: 1 }}
                         >
                           {exp.company} {exp.company === 'AGH University of Science and Technology' ? '• Krakow, Poland 🇵🇱' : '• Remote 🌐'}
                         </Typography>
                         <Typography
                           variant="subtitle1"
-                          sx={{ color: '#888' }}
+                          sx={{ color: theme.palette.text.secondary }}
                         >
                           {exp.period}
                         </Typography>
@@ -139,9 +155,9 @@ const Experience = () => {
                           key={i}
                           sx={{ 
                             mb: 1,
-                            color: '#333',
+                            color: theme.palette.text.primary,
                             '&::marker': {
-                              color: '#666'
+                              color: theme.palette.text.secondary
                             }
                           }}
                         >

@@ -4,8 +4,11 @@ import { motion } from 'framer-motion';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LaunchIcon from '@mui/icons-material/Launch';
+import { useTheme } from '@mui/material/styles';
 
 const Contact = () => {
+  const theme = useTheme();
+
   return (
     <Box
       id="contact"
@@ -14,7 +17,7 @@ const Contact = () => {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%)',
+        background: 'transparent',
         py: 12,
       }}
     >
@@ -32,7 +35,9 @@ const Contact = () => {
               mb: 6,
               fontWeight: 700,
               textAlign: 'center',
-              background: 'linear-gradient(45deg, #000000 30%, #666666 90%)',
+              background: theme.palette.mode === 'dark'
+                ? 'linear-gradient(45deg, #90caf9 30%, #f48fb1 90%)'
+                : 'linear-gradient(45deg, #000000 30%, #666666 90%)',
               backgroundClip: 'text',
               textFillColor: 'transparent',
               WebkitBackgroundClip: 'text',
@@ -53,10 +58,16 @@ const Contact = () => {
               sx={{
                 p: 4,
                 borderRadius: 4,
-                background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
+                background: theme.palette.mode === 'dark'
+                  ? 'linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01))'
+                  : 'linear-gradient(145deg, #ffffff, #f0f0f0)',
                 backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.6)',
-                boxShadow: '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
+                border: theme.palette.mode === 'dark'
+                  ? '1px solid rgba(255, 255, 255, 0.1)'
+                  : '1px solid rgba(255, 255, 255, 0.6)',
+                boxShadow: theme.palette.mode === 'dark'
+                  ? '10px 10px 30px rgba(209,209,209,0.05), -10px -10px 30px rgba(255,255,255,0.01)'
+                  : '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
                 transition: 'transform 0.3s ease-in-out',
                 '&:hover': {
                   transform: 'translateY(-5px)'
@@ -67,7 +78,7 @@ const Contact = () => {
                 variant="body1"
                 sx={{
                   fontSize: '1.2rem',
-                  color: '#333',
+                  color: theme.palette.text.primary,
                   mb: 4,
                   textAlign: 'center',
                   lineHeight: 1.8,
@@ -94,13 +105,13 @@ const Contact = () => {
                         }}
                         style={{ cursor: 'pointer' }}
                       >
-                        <EmailIcon sx={{ fontSize: 24, color: '#666' }} />
+                        <EmailIcon sx={{ fontSize: 24, color: theme.palette.text.primary }} />
                       </motion.div>
-                      <Typography variant="h6" sx={{ fontWeight: 600, color: '#333' }}>
+                      <Typography variant="h6" sx={{ fontWeight: 600, color: theme.palette.text.primary }}>
                         Email
                       </Typography>
                     </Box>
-                    <Typography variant="body1" sx={{ color: '#666', textAlign: 'center' }}>
+                    <Typography variant="body1" sx={{ color: theme.palette.text.secondary, textAlign: 'center' }}>
                       alexminkhant007@gmail.com
                     </Typography>
                     <Button
@@ -108,12 +119,12 @@ const Contact = () => {
                       startIcon={<LaunchIcon />}
                       href="mailto:alexminkhant007@gmail.com"
                       sx={{
-                        borderColor: '#666',
-                        color: '#666',
+                        borderColor: theme.palette.text.primary,
+                        color: theme.palette.text.primary,
                         '&:hover': {
-                          borderColor: '#333',
-                          color: '#333',
-                          backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                          borderColor: theme.palette.text.secondary,
+                          color: theme.palette.text.secondary,
+                          backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.04)',
                         },
                       }}
                     >
@@ -137,13 +148,13 @@ const Contact = () => {
                         }}
                         style={{ cursor: 'pointer' }}
                       >
-                        <PhoneIcon sx={{ fontSize: 24, color: '#666' }} />
+                        <PhoneIcon sx={{ fontSize: 24, color: theme.palette.text.primary }} />
                       </motion.div>
-                      <Typography variant="h6" sx={{ fontWeight: 600, color: '#333' }}>
+                      <Typography variant="h6" sx={{ fontWeight: 600, color: theme.palette.text.primary }}>
                         Phone
                       </Typography>
                     </Box>
-                    <Typography variant="body1" sx={{ color: '#666', textAlign: 'center' }}>
+                    <Typography variant="body1" sx={{ color: theme.palette.text.secondary, textAlign: 'center' }}>
                       +48 572 581 007
                     </Typography>
                     <Button
@@ -151,12 +162,12 @@ const Contact = () => {
                       startIcon={<LaunchIcon />}
                       href="tel:+48572581007"
                       sx={{
-                        borderColor: '#666',
-                        color: '#666',
+                        borderColor: theme.palette.text.primary,
+                        color: theme.palette.text.primary,
                         '&:hover': {
-                          borderColor: '#333',
-                          color: '#333',
-                          backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                          borderColor: theme.palette.text.secondary,
+                          color: theme.palette.text.secondary,
+                          backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.04)',
                         },
                       }}
                     >

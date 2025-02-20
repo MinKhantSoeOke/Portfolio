@@ -1,8 +1,10 @@
 import React from 'react';
 import { Box, Container, Typography, Paper, Grid } from '@mui/material';
 import { motion } from 'framer-motion';
+import { useTheme } from '@mui/material/styles';
 
 const About = () => {
+  const theme = useTheme();
   const skills = {
     'Data Science': [
       'Machine Learning',
@@ -33,7 +35,7 @@ const About = () => {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%)',
+        background: 'transparent',
         py: 12,
       }}
     >
@@ -51,7 +53,9 @@ const About = () => {
               mb: 6,
               fontWeight: 700,
               textAlign: 'center',
-              background: 'linear-gradient(45deg, #000000 30%, #666666 90%)',
+              background: theme.palette.mode === 'dark'
+                ? 'linear-gradient(45deg, #90caf9 30%, #f48fb1 90%)'
+                : 'linear-gradient(45deg, #000000 30%, #666666 90%)',
               backgroundClip: 'text',
               textFillColor: 'transparent',
               WebkitBackgroundClip: 'text',
@@ -77,10 +81,14 @@ const About = () => {
                         p: 4,
                         height: '100%',
                         borderRadius: 4,
-                        background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
+                        background: theme.palette.background.paper,
                         backdropFilter: 'blur(10px)',
-                        border: '1px solid rgba(255, 255, 255, 0.6)',
-                        boxShadow: '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
+                        border: theme.palette.mode === 'dark'
+                          ? '1px solid rgba(255, 255, 255, 0.1)'
+                          : '1px solid rgba(255, 255, 255, 0.6)',
+                        boxShadow: theme.palette.mode === 'dark'
+                          ? '10px 10px 30px rgba(209,209,209,0.05), -10px -10px 30px rgba(255,255,255,0.01)'
+                          : '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
                         transition: 'transform 0.3s ease-in-out',
                         '&:hover': {
                           transform: 'translateY(-5px)'
@@ -92,7 +100,7 @@ const About = () => {
                         sx={{
                           mb: 3,
                           fontWeight: 600,
-                          color: '#333',
+                          color: theme.palette.text.primary,
                         }}
                       >
                         Introduction
@@ -102,7 +110,7 @@ const About = () => {
                         sx={{
                           fontSize: '1.1rem',
                           lineHeight: 1.8,
-                          color: '#666',
+                          color: theme.palette.text.secondary,
                           mb: 2,
                         }}
                       >
@@ -113,7 +121,7 @@ const About = () => {
                         sx={{
                           fontSize: '1.1rem',
                           lineHeight: 1.8,
-                          color: '#666',
+                          color: theme.palette.text.secondary,
                         }}
                       >
                         Passionate about transforming complex datasets into clear, actionable insights that support informed decision-making.
@@ -135,10 +143,14 @@ const About = () => {
                         p: 4,
                         height: '100%',
                         borderRadius: 4,
-                        background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
+                        background: theme.palette.background.paper,
                         backdropFilter: 'blur(10px)',
-                        border: '1px solid rgba(255, 255, 255, 0.6)',
-                        boxShadow: '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
+                        border: theme.palette.mode === 'dark'
+                          ? '1px solid rgba(255, 255, 255, 0.1)'
+                          : '1px solid rgba(255, 255, 255, 0.6)',
+                        boxShadow: theme.palette.mode === 'dark'
+                          ? '10px 10px 30px rgba(209,209,209,0.05), -10px -10px 30px rgba(255,255,255,0.01)'
+                          : '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
                         transition: 'transform 0.3s ease-in-out',
                         '&:hover': {
                           transform: 'translateY(-5px)'
@@ -150,7 +162,7 @@ const About = () => {
                         sx={{
                           mb: 3,
                           fontWeight: 600,
-                          color: '#333',
+                          color: theme.palette.text.primary,
                         }}
                       >
                         Languages
@@ -183,13 +195,19 @@ const About = () => {
                                 px: 2,
                                 py: 1,
                                 borderRadius: 2,
-                                backgroundColor: 'rgba(0, 0, 0, 0.04)',
-                                color: '#666',
+                                backgroundColor: theme.palette.mode === 'dark'
+                                  ? 'rgba(255, 255, 255, 0.08)'
+                                  : 'rgba(0, 0, 0, 0.04)',
+                                color: theme.palette.text.secondary,
                                 transition: 'all 0.3s ease-in-out',
                                 '&:hover': {
-                                  backgroundColor: 'rgba(0, 0, 0, 0.08)',
+                                  backgroundColor: theme.palette.mode === 'dark'
+                                    ? 'rgba(255, 255, 255, 0.15)'
+                                    : 'rgba(0, 0, 0, 0.08)',
                                   transform: 'translateY(-2px)',
-                                  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                                  boxShadow: theme.palette.mode === 'dark'
+                                    ? '0 4px 8px rgba(0,0,0,0.3)'
+                                    : '0 4px 8px rgba(0,0,0,0.1)',
                                 },
                               }}
                             >
@@ -219,10 +237,14 @@ const About = () => {
                     p: 4,
                     height: '100%',
                     borderRadius: 4,
-                    background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
+                    background: theme.palette.background.paper,
                     backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255, 255, 255, 0.6)',
-                    boxShadow: '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
+                    border: theme.palette.mode === 'dark'
+                      ? '1px solid rgba(255, 255, 255, 0.1)'
+                      : '1px solid rgba(255, 255, 255, 0.6)',
+                    boxShadow: theme.palette.mode === 'dark'
+                      ? '10px 10px 30px rgba(209,209,209,0.05), -10px -10px 30px rgba(255,255,255,0.01)'
+                      : '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
                     transition: 'transform 0.3s ease-in-out',
                     '&:hover': {
                       transform: 'translateY(-5px)'
@@ -234,7 +256,7 @@ const About = () => {
                     sx={{
                       mb: 3,
                       fontWeight: 600,
-                      color: '#333',
+                      color: theme.palette.text.primary,
                     }}
                   >
                     Skills
@@ -245,7 +267,7 @@ const About = () => {
                       <Typography
                         variant="h6"
                         sx={{
-                          color: '#666',
+                          color: theme.palette.text.secondary,
                           mb: 2,
                           fontWeight: 500,
                         }}
@@ -276,13 +298,19 @@ const About = () => {
                                 px: 2,
                                 py: 1,
                                 borderRadius: 2,
-                                backgroundColor: 'rgba(0, 0, 0, 0.04)',
-                                color: '#666',
+                                backgroundColor: theme.palette.mode === 'dark'
+                                  ? 'rgba(255, 255, 255, 0.08)'
+                                  : 'rgba(0, 0, 0, 0.04)',
+                                color: theme.palette.text.secondary,
                                 transition: 'all 0.3s ease-in-out',
                                 '&:hover': {
-                                  backgroundColor: 'rgba(0, 0, 0, 0.08)',
+                                  backgroundColor: theme.palette.mode === 'dark'
+                                    ? 'rgba(255, 255, 255, 0.15)'
+                                    : 'rgba(0, 0, 0, 0.08)',
                                   transform: 'translateY(-2px)',
-                                  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                                  boxShadow: theme.palette.mode === 'dark'
+                                    ? '0 4px 8px rgba(0,0,0,0.3)'
+                                    : '0 4px 8px rgba(0,0,0,0.1)',
                                 },
                               }}
                             >

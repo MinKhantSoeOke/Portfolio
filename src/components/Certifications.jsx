@@ -2,8 +2,11 @@ import React from 'react';
 import { Box, Container, Typography, Paper, Grid } from '@mui/material';
 import GoogleLogo from '../assets/google_logo.png';
 import { motion } from 'framer-motion';
+import { useTheme } from '@mui/material/styles';
 
 const Certifications = () => {
+  const theme = useTheme();
+
   const certifications = [
     {
       name: 'Foundations: Data, Data, Everywhere',
@@ -42,8 +45,8 @@ const Certifications = () => {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%)',
-        py: 12,
+        background: 'transparent',
+        py: 8,
       }}
     >
       <Container maxWidth="lg">
@@ -60,7 +63,9 @@ const Certifications = () => {
               mb: 6,
               fontWeight: 700,
               textAlign: 'center',
-              background: 'linear-gradient(45deg, #000000 30%, #666666 90%)',
+              background: theme.palette.mode === 'dark'
+                ? 'linear-gradient(45deg, #90caf9 30%, #f48fb1 90%)'
+                : 'linear-gradient(45deg, #000000 30%, #666666 90%)',
               backgroundClip: 'text',
               textFillColor: 'transparent',
               WebkitBackgroundClip: 'text',
@@ -85,10 +90,14 @@ const Certifications = () => {
                       p: 4,
                       height: '100%',
                       borderRadius: 4,
-                      background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
+                      backgroundColor: theme.palette.background.paper,
                       backdropFilter: 'blur(10px)',
-                      border: '1px solid rgba(255, 255, 255, 0.6)',
-                      boxShadow: '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
+                      border: theme.palette.mode === 'dark'
+                        ? '1px solid rgba(255, 255, 255, 0.1)'
+                        : '1px solid rgba(255, 255, 255, 0.6)',
+                      boxShadow: theme.palette.mode === 'dark'
+                        ? '10px 10px 30px rgba(209,209,209,0.05), -10px -10px 30px rgba(255,255,255,0.01)'
+                        : '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
                       transition: 'transform 0.3s ease-in-out',
                       '&:hover': {
                         transform: 'translateY(-5px)'
@@ -118,32 +127,32 @@ const Certifications = () => {
                       />
                       <Typography
                         variant="h5"
-                        sx={{ fontWeight: 600 }}
+                        sx={{ fontWeight: 600, color: theme.palette.text.primary }}
                       >
                         {cert.name}
                       </Typography>
                     </Box>
                     <Typography
                       variant="subtitle1"
-                      sx={{ color: '#666', mb: 1 }}
+                      sx={{ color: theme.palette.text.secondary, mb: 1 }}
                     >
                       {cert.issuer}
                     </Typography>
                     <Typography
                       variant="body2"
-                      sx={{ color: '#888', mb: 2 }}
+                      sx={{ color: theme.palette.text.secondary, mb: 2 }}
                     >
                       Issued: {cert.issueDate}
                     </Typography>
                     <Typography
                       variant="body1"
-                      sx={{ color: '#333', mb: 1 }}
+                      sx={{ color: theme.palette.text.primary, mb: 1 }}
                     >
                       Grade: {cert.grade}
                     </Typography>
                     <Typography
                       variant="body2"
-                      sx={{ color: '#666', mb: 2 }}
+                      sx={{ color: theme.palette.text.secondary, mb: 2 }}
                     >
                       Credential ID: {cert.credentialId}
                     </Typography>
@@ -200,27 +209,40 @@ const Certifications = () => {
                     )}
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                       {cert.skills.map((skill, i) => (
-                        <Paper
+                        <motion.div
                           key={i}
-                          elevation={0}
-                          sx={{
-                            px: 2,
-                            py: 1,
-                            borderRadius: 2,
-                            backgroundColor: 'rgba(0, 0, 0, 0.04)',
-                            color: '#666',
-                            transition: 'all 0.3s ease-in-out',
-                            '&:hover': {
-                              backgroundColor: 'rgba(0, 0, 0, 0.08)',
-                              transform: 'translateY(-2px)',
-                              boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                            },
-                          }}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3, delay: i * 0.1 }}
+                          viewport={{ once: true }}
                         >
-                          <Typography variant="body2">
-                            {skill}
-                          </Typography>
-                        </Paper>
+                          <Paper
+                            elevation={0}
+                            sx={{
+                              px: 2,
+                              py: 1,
+                              borderRadius: 2,
+                              backgroundColor: theme.palette.mode === 'dark'
+                                ? 'rgba(255, 255, 255, 0.08)'
+                                : 'rgba(0, 0, 0, 0.04)',
+                              color: theme.palette.text.secondary,
+                              transition: 'all 0.3s ease-in-out',
+                              '&:hover': {
+                                backgroundColor: theme.palette.mode === 'dark'
+                                  ? 'rgba(255, 255, 255, 0.15)'
+                                  : 'rgba(0, 0, 0, 0.08)',
+                                transform: 'translateY(-2px)',
+                                boxShadow: theme.palette.mode === 'dark'
+                                  ? '0 4px 8px rgba(0,0,0,0.3)'
+                                  : '0 4px 8px rgba(0,0,0,0.1)',
+                              },
+                            }}
+                          >
+                            <Typography variant="body2">
+                              {skill}
+                            </Typography>
+                          </Paper>
+                        </motion.div>
                       ))}
                     </Box>
                   </Paper>

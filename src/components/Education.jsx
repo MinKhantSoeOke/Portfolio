@@ -2,8 +2,11 @@ import React from 'react';
 import { Box, Container, Typography, Paper } from '@mui/material';
 import AGHLogo from '../assets/AGH_logo.png';
 import { motion } from 'framer-motion';
+import { useTheme } from '@mui/material/styles';
 
 const Education = () => {
+  const theme = useTheme();
+
   return (
     <Box
       id="education"
@@ -12,11 +15,11 @@ const Education = () => {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%)',
-        py: 12,
+        background: 'transparent',
+        py: 8,
       }}
     >
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -30,7 +33,9 @@ const Education = () => {
               mb: 6,
               fontWeight: 700,
               textAlign: 'center',
-              background: 'linear-gradient(45deg, #000000 30%, #666666 90%)',
+              background: theme.palette.mode === 'dark'
+                ? 'linear-gradient(45deg, #90caf9 30%, #f48fb1 90%)'
+                : 'linear-gradient(45deg, #000000 30%, #666666 90%)',
               backgroundClip: 'text',
               textFillColor: 'transparent',
               WebkitBackgroundClip: 'text',
@@ -51,10 +56,14 @@ const Education = () => {
               sx={{
                 p: 4,
                 borderRadius: 4,
-                background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
+                background: theme.palette.background.paper,
                 backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.6)',
-                boxShadow: '15px 15px 30px #d1d1d1, -15px -15px 30px #ffffff',
+                border: theme.palette.mode === 'dark'
+                  ? '1px solid rgba(255, 255, 255, 0.1)'
+                  : '1px solid rgba(255, 255, 255, 0.6)',
+                boxShadow: theme.palette.mode === 'dark'
+                  ? '10px 10px 30px rgba(209,209,209,0.05), -10px -10px 30px rgba(255,255,255,0.01)'
+                  : '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
                 transition: 'transform 0.3s ease-in-out',
                 '&:hover': {
                   transform: 'translateY(-5px)'
@@ -62,67 +71,71 @@ const Education = () => {
               }}
             >
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <motion.img
-                  src={AGHLogo}
-                  alt="AGH University Logo"
-                  whileHover={{ 
-                    scale: 1.1,
-                    rotate: 5,
-                    filter: 'drop-shadow(0 8px 8px rgba(0,0,0,0.2))'
-                  }}
-                  transition={{ 
-                    type: 'spring',
-                    stiffness: 300,
-                    damping: 15
-                  }}
-                  style={{ 
-                    height: '50px', 
-                    marginRight: '16px',
-                    objectFit: 'contain',
-                    cursor: 'pointer'
-                  }}
-                />
-                <Typography
-                  variant="h5"
-                  sx={{ fontWeight: 600 }}
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                  style={{ display: 'inline-block', marginRight: '16px', cursor: 'pointer' }}
                 >
+                  <Box
+                    sx={{
+                      width: '50px',
+                      height: '50px',
+                      borderRadius: '50%',
+                      backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : 'transparent',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: theme.palette.mode === 'dark'
+                        ? '0px 4px 12px rgba(0,0,0,0.2)'
+                        : 'none',
+                      transition: 'all 0.3s ease-in-out'
+                    }}
+                  >
+                    <img
+                      src={AGHLogo}
+                      alt="AGH University Logo"
+                      style={{ height: '40px', objectFit: 'contain' }}
+                    />
+                  </Box>
+                </motion.div>
+                <Typography variant="h5" sx={{ fontWeight: 600 }}>
                   AGH University of Science and Technology
                 </Typography>
               </Box>
               <Typography
                 variant="h6"
-                sx={{ color: '#666', mb: 1 }}
+                sx={{ color: theme.palette.text.secondary, mb: 1 }}
               >
                 Bachelor of Science in Computer Science
               </Typography>
               <Typography
                 variant="subtitle1"
-                sx={{ color: '#888', mb: 1 }}
+                sx={{ color: theme.palette.text.secondary, mb: 1 }}
               >
                 October 2021 - February 2025
               </Typography>
               <Typography
                 variant="subtitle1"
-                sx={{ color: '#888', mb: 2 }}
+                sx={{ color: theme.palette.text.secondary, mb: 2 }}
               >
                 Krakow, Poland 🇵🇱
               </Typography>
               <Box sx={{ mb: 2 }}>
                 <Typography
                   variant="body1"
-                  sx={{ color: '#333', mb: 1 }}
+                  sx={{ color: theme.palette.text.primary, mb: 1 }}
                 >
                   Overall GPA: 4.5 / 5.0
                 </Typography>
                 <Typography
                   variant="body1"
-                  sx={{ color: '#333', mb: 1 }}
+                  sx={{ color: theme.palette.text.primary, mb: 1 }}
                 >
                   Engineer Qualification Examination: 5.0 / 5.0
                 </Typography>
                 <Typography
                   variant="body1"
-                  sx={{ color: '#333' }}
+                  sx={{ color: theme.palette.text.primary }}
                 >
                   Diploma Project: Low-Latency Object Detection in Autonomous Vehicles
                 </Typography>

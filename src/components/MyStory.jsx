@@ -6,8 +6,11 @@ import BusinessIcon from '@mui/icons-material/Business';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import confetti from 'canvas-confetti';
+import { useTheme } from '@mui/material/styles';
 
 const MyStory = () => {
+  const theme = useTheme();
+
   const timelineEvents = [
     {
       year: '2025',
@@ -176,189 +179,189 @@ const MyStory = () => {
       sx={{
         minHeight: '100vh',
         width: '100%',
-        pt: { xs: 10, md: 12 },
-        pb: 8,
-        background: 'linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%)'
+        display: 'flex',
+        alignItems: 'center',
+        background: 'transparent',
+        py: 8,
       }}
     >
-      <Container maxWidth={false} sx={{ px: { xs: 2, sm: 4, md: 8, lg: 12 } }}>
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+      <Container maxWidth="lg">
+        <Typography
+          variant="h2"
+          component="h2"
+          sx={{
+            mb: 6,
+            fontWeight: 700,
+            textAlign: 'center',
+            background: theme.palette.mode === 'dark'
+              ? 'linear-gradient(45deg, #90caf9 30%, #f48fb1 90%)'
+              : 'linear-gradient(45deg, #000000 30%, #666666 90%)',
+            backgroundClip: 'text',
+            textFillColor: 'transparent',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
         >
-          <Typography
-            variant="h2"
-            component="h1"
-            sx={{
-              mb: 6,
-              fontWeight: 700,
-              textAlign: 'center',
-              background: 'linear-gradient(45deg, #000000 30%, #666666 90%)',
-              backgroundClip: 'text',
-              textFillColor: 'transparent',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            My Story
-          </Typography>
+          My Story
+        </Typography>
 
-          <Box sx={{ position: 'relative', maxWidth: '1400px', mx: 'auto' }}>
-            <Box
-              sx={{
-                position: 'absolute',
-                left: { xs: '35px', md: '50%' },
-                transform: { xs: 'none', md: 'translateX(-50%)' },
-                height: '100%',
-                width: '2px',
-                backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                zIndex: 0
-              }}
-            />
-            {timelineEvents.map((yearGroup, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
+        <Box sx={{ position: 'relative', maxWidth: '1400px', mx: 'auto' }}>
+          <Box
+            sx={{
+              position: 'absolute',
+              left: { xs: '35px', md: '50%' },
+              transform: { xs: 'none', md: 'translateX(-50%)' },
+              height: '100%',
+              width: '2px',
+              backgroundColor: theme.palette.mode === 'dark'
+                ? 'rgba(255,255,255,0.1)'
+                : 'rgba(0, 0, 0, 0.1)',
+              zIndex: 0
+            }}
+          />
+          {timelineEvents.map((yearGroup, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+            >
+              <Typography
+                variant="h4"
+                sx={{
+                  mb: 3,
+                  mt: index === 0 ? 0 : 4,
+                  fontWeight: 600,
+                  color: theme.palette.text.primary,
+                  pl: { xs: 7, md: 0 },
+                  textAlign: { xs: 'left', md: 'right' },
+                  pr: { xs: 0, md: 4 },
+                  width: { xs: 'auto', md: '45%' }
+                }}
               >
-                <Typography
-                  variant="h4"
+                {yearGroup.year}
+              </Typography>
+
+              {yearGroup.events.map((event, eventIndex) => (
+                <Box
+                  key={eventIndex}
                   sx={{
-                    mb: 3,
-                    mt: index === 0 ? 0 : 4,
-                    fontWeight: 600,
-                    color: '#333',
-                    pl: { xs: 7, md: 0 },
-                    textAlign: { xs: 'left', md: 'right' },
-                    pr: { xs: 0, md: 4 },
-                    width: { xs: 'auto', md: '45%' }
+                    display: 'flex',
+                    flexDirection: { xs: 'column', md: 'row' },
+                    justifyContent: 'space-between',
+                    mb: 4,
+                    position: 'relative',
                   }}
                 >
-                  {yearGroup.year}
-                </Typography>
-
-                {yearGroup.events.map((event, eventIndex) => (
                   <Box
-                    key={eventIndex}
                     sx={{
+                      position: 'absolute',
+                      left: { xs: '16px', md: '50%' },
+                      transform: { xs: 'none', md: 'translateX(-50%)' },
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      backgroundColor: theme.palette.background.paper,
+                      border: '2px solid',
+                      borderColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0, 0, 0, 0.1)',
                       display: 'flex',
-                      flexDirection: { xs: 'column', md: 'row' },
-                      justifyContent: 'space-between',
-                      mb: 4,
-                      position: 'relative',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      zIndex: 1,
+                      color: theme.palette.text.primary,
+                      mt: { xs: 0, md: 2 }
                     }}
                   >
-                    <Box
+                    {event.icon}
+                  </Box>
+
+                  <Box
+                    sx={{
+                      width: { xs: 'auto', md: '45%' },
+                      textAlign: { xs: 'left', md: 'right' },
+                      pr: { xs: 0, md: 4 },
+                      pl: { xs: 7, md: 0 },
+                      mb: { xs: 2, md: 0 }
+                    }}
+                  >
+                    <Typography
+                      variant="h6"
                       sx={{
-                        position: 'absolute',
-                        left: { xs: '16px', md: '50%' },
-                        transform: { xs: 'none', md: 'translateX(-50%)' },
-                        width: '40px',
-                        height: '40px',
-                        borderRadius: '50%',
-                        backgroundColor: '#fff',
-                        border: '2px solid #000',
+                        color: theme.palette.text.secondary,
+                        fontWeight: 500,
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        zIndex: 1,
-                        color: '#000',
-                        mt: { xs: 0, md: 2 }
+                        justifyContent: { xs: 'flex-start', md: 'flex-end' },
+                        gap: 1
                       }}
                     >
-                      {event.icon}
-                    </Box>
+                      <ArrowUpwardIcon /> {event.period}
+                    </Typography>
+                  </Box>
 
-                    <Box
+                  <Box
+                    sx={{
+                      width: { xs: 'auto', md: '45%' },
+                      pl: { xs: 7, md: 4 }
+                    }}
+                  >
+                    <Paper
+                      elevation={0}
                       sx={{
-                        width: { xs: 'auto', md: '45%' },
-                        textAlign: { xs: 'left', md: 'right' },
-                        pr: { xs: 0, md: 4 },
-                        pl: { xs: 7, md: 0 },
-                        mb: { xs: 2, md: 0 }
+                        p: 3,
+                        borderRadius: 4,
+                        background: theme.palette.background.paper,
+                        backdropFilter: 'blur(10px)',
+                        border: theme.palette.mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.6)',
+                        boxShadow: theme.palette.mode === 'dark' ? '10px 10px 30px rgba(209,209,209,0.05), -10px -10px 30px rgba(255,255,255,0.01)' : '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
+                        transition: 'transform 0.3s ease-in-out',
+                        '&:hover': {
+                          transform: 'translateY(-5px)'
+                        },
+                        cursor: event.celebrate ? 'pointer' : 'auto'
                       }}
+                      onClick={() => event.celebrate && runFireworks()}
                     >
                       <Typography
-                        variant="h6"
-                        sx={{
-                          color: '#666',
-                          fontWeight: 500,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: { xs: 'flex-start', md: 'flex-end' },
-                          gap: 1
+                        variant="h5"
+                        sx={{ 
+                          fontWeight: 600, 
+                          mb: 2,
+                          ...(event.celebrate && {
+                            background: 'linear-gradient(45deg, #ff6b6b 30%, #ff8e53 90%)',
+                            backgroundClip: 'text',
+                            textFillColor: 'transparent',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            transition: 'all 0.3s ease'
+                          }) 
                         }}
                       >
-                        <ArrowUpwardIcon /> {event.period}
+                        {event.title}
                       </Typography>
-                    </Box>
-
-                    <Box
-                      sx={{
-                        width: { xs: 'auto', md: '45%' },
-                        pl: { xs: 7, md: 4 }
-                      }}
-                    >
-                      <Paper
-                        elevation={0}
-                        sx={{
-                          p: 3,
-                          borderRadius: 4,
-                          background: 'linear-gradient(145deg, #ffffff, #f0f0f0)',
-                          backdropFilter: 'blur(10px)',
-                          border: '1px solid rgba(255, 255, 255, 0.6)',
-                          boxShadow: '10px 10px 20px #d1d1d1, -10px -10px 20px #ffffff',
-                          transition: 'transform 0.3s ease-in-out',
-                          '&:hover': {
-                            transform: 'translateY(-5px)'
-                          },
-                          cursor: event.celebrate ? 'pointer' : 'auto'
-                        }}
-                        onClick={() => event.celebrate && runFireworks()}
-                      >
+                      {event.description.map((paragraph, i) => (
                         <Typography
-                          variant="h5"
-                          sx={{ 
-                            fontWeight: 600, 
-                            mb: 2,
-                            ...(event.celebrate && {
-                              background: 'linear-gradient(45deg, #ff6b6b 30%, #ff8e53 90%)',
-                              backgroundClip: 'text',
-                              textFillColor: 'transparent',
-                              WebkitBackgroundClip: 'text',
-                              WebkitTextFillColor: 'transparent',
-                              transition: 'all 0.3s ease'
-                            }) 
+                          key={i}
+                          variant="body1"
+                          sx={{
+                            color: theme.palette.text.primary,
+                            lineHeight: 1.8,
+                            mb: i < event.description.length - 1 ? 2 : 0,
+                            ...(paragraph.startsWith('✅') && {
+                              pl: 2
+                            })
                           }}
                         >
-                          {event.title}
+                          {paragraph}
                         </Typography>
-                        {event.description.map((paragraph, i) => (
-                          <Typography
-                            key={i}
-                            variant="body1"
-                            sx={{
-                              color: '#333',
-                              lineHeight: 1.8,
-                              mb: i < event.description.length - 1 ? 2 : 0,
-                              ...(paragraph.startsWith('✅') && {
-                                pl: 2
-                              })
-                            }}
-                          >
-                            {paragraph}
-                          </Typography>
-                        ))}
-                      </Paper>
-                    </Box>
+                      ))}
+                    </Paper>
                   </Box>
-                ))}
-              </motion.div>
-            ))}
-          </Box>
-        </motion.div>
+                </Box>
+              ))}
+            </motion.div>
+          ))}
+        </Box>
       </Container>
     </Box>
   );
