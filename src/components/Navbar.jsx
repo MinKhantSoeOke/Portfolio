@@ -213,7 +213,12 @@ const Navbar = () => {
         onClose={handleDrawerToggle}
         sx={{
           '& .MuiDrawer-paper': {
-            width: 240,
+            width: 280,
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            overflow: 'hidden',
             background: theme.palette.mode === 'dark' ? 'rgba(30, 30, 30, 0.95)' : 'rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(10px)',
           },
@@ -289,13 +294,15 @@ const Navbar = () => {
               )}
             </ListItem>
           ))}
-          <ListItem sx={{ p: 2, position: 'fixed', bottom: 0, width: '240px', borderTop: 1, borderColor: 'divider' }}>
+          <Box sx={{ flex: 1 }} /> {/* Spacer */}
+          <ListItem sx={{ 
+            borderTop: 1, borderColor: 'divider', p: 2, bgcolor: 'background.paper' 
+          }}>
             <ColorModeContext.Consumer>
               {({ toggleColorMode }) => (
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  style={{ width: '100%' }}
                 >
                   <Button
                     fullWidth
@@ -303,8 +310,7 @@ const Navbar = () => {
                     startIcon={theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
                     sx={{
                       color: theme.palette.text.primary,
-                      justifyContent: 'flex-start',
-                      pl: 1,
+                      justifyContent: 'space-between',
                       '&:hover': {
                         backgroundColor: theme.palette.mode === 'dark'
                           ? 'rgba(255, 255, 255, 0.1)'
@@ -312,7 +318,7 @@ const Navbar = () => {
                       },
                     }}
                   >
-                    {theme.palette.mode === 'dark' ? 'Light Mode' : 'Dark Mode'}
+                    {theme.palette.mode === 'dark' ? 'Light' : 'Dark'} Mode
                   </Button>
                 </motion.div>
               )}
