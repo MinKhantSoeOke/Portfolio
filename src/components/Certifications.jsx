@@ -9,13 +9,22 @@ const Certifications = () => {
 
   const certifications = [
     {
-      name: 'Foundations: Data, Data, Everywhere',
-      issueDate: 'January 21, 2025',
+      name: 'Process Data from Dirty to Clean',
+      issueDate: 'February 21, 2025',
       issuer: 'Google',
-      grade: '97.12%',
-      credentialId: 'HR8FVWFPIOY1',
-      link: 'https://www.coursera.org/account/accomplishments/verify/HR8FVWFPIOY1',
-      skills: ['Spreadsheet', 'Data Analysis', 'SQL', 'Data Visualization', 'Data Cleansing']
+      grade: '100%',
+      credentialId: 'SC7C136J9SVT',
+      link: 'https://www.coursera.org/account/accomplishments/records/SC7C136J9SVT',
+      skills: ['Spreadsheet', 'Data Integrity', 'Sample Size Determination', 'SQL', 'Data Cleansing']
+    },
+    {
+      name: 'Prepare Data for Exploration',
+      issueDate: 'February 12, 2025',
+      issuer: 'Google',
+      grade: '100%',
+      credentialId: '5FSGXCM8UQKZ',
+      link: 'https://www.coursera.org/account/accomplishments/verify/5FSGXCM8UQKZ',
+      skills: ['Data Collection', 'Spreadsheet', 'Metadata', 'SQL', 'Data Ethics']
     },
     {
       name: 'Ask Questions to Make Data-Driven Decisions',
@@ -27,13 +36,13 @@ const Certifications = () => {
       skills: ['Decision-Making', 'Spreadsheet', 'Data Analysis', 'Problem Solving', 'Questioning']
     },
     {
-      name: 'Prepare Data for Exploration',
-      issueDate: 'February 12, 2025',
+      name: 'Foundations: Data, Data, Everywhere',
+      issueDate: 'January 21, 2025',
       issuer: 'Google',
-      grade: '100%',
-      credentialId: '5FSGXCM8UQKZ',
-      link: 'https://www.coursera.org/account/accomplishments/verify/5FSGXCM8UQKZ',
-      skills: ['Data Collection', 'Spreadsheet', 'Metadata', 'SQL', 'Data Ethics']
+      grade: '97.12%',
+      credentialId: 'HR8FVWFPIOY1',
+      link: 'https://www.coursera.org/account/accomplishments/verify/HR8FVWFPIOY1',
+      skills: ['Spreadsheet', 'Data Analysis', 'SQL', 'Data Visualization', 'Data Cleansing']
     }
   ];
 
