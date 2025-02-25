@@ -9,6 +9,15 @@ const Certifications = () => {
 
   const certifications = [
     {
+      name: 'Analyze Data to Answer Questions',
+      issueDate: 'February 25, 2025',
+      issuer: 'Google',
+      grade: '98.08%',
+      credentialId: 'FWTEHT6MK9ZG',
+      link: 'https://www.coursera.org/account/accomplishments/verify/FWTEHT6MK9ZG',
+      skills: ['Data Aggregation', 'Spreadsheet', 'Data Analysis', 'Data Calculations', 'SQL']
+    },
+    {
       name: 'Process Data from Dirty to Clean',
       issueDate: 'February 21, 2025',
       issuer: 'Google',
