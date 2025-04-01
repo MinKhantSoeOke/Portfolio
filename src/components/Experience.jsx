@@ -19,6 +19,17 @@ const Experience = () => {
       ]
     },
     {
+      title: 'Data Analyst',
+      company: 'Ayar Yadanar Co., Ltd',
+      period: 'June, 2022 - December, 2023',
+      achievements: [
+        'Created and optimized data visualizations using Python and Tableau, enabling stakeholders to make informed decisions.',
+        'Analyzed large datasets to identify trends in operational performance, improving process efficiency by 12%.',
+        'Built statistical models for resource allocation forecasting, reducing operational costs by 10%.',
+        'Streamlined data collection and reporting workflows with SQL and automation tools, enhancing data reliability and cutting processing time by 20%.'
+      ]
+    },
+    {
       title: 'IT Volunteer',
       company: 'NUG',
       period: 'March, 2024 - June, 2024',
