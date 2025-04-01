@@ -11,6 +11,7 @@ import Certifications from './components/Certifications';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import MyStory from './components/MyStory';
+import Resume from './components/Resume';
 import { IconButton } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
@@ -97,6 +98,7 @@ function App() {
             <Routes>
               <Route path="/" element={<MainContent />} />
               <Route path="my-story" element={<MyStory />} />
+              <Route path="resume" element={<Resume />} />
             </Routes>
           </Box>
         </ThemeProvider>

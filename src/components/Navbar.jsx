@@ -59,6 +59,7 @@ const Navbar = () => {
     { title: 'Certifications', id: 'certifications' },
     { title: 'Projects', id: 'projects' },
     { title: 'Contact Me', id: 'contact' },
+    { title: 'Resume', path: '/resume' }
   ];
 
   const handleDrawerToggle = () => {
