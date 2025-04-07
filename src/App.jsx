@@ -7,6 +7,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
 import Education from './components/Education';
+import Publications from './components/Publications';
 import Certifications from './components/Certifications';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
@@ -56,6 +57,7 @@ const MainContent = () => {
       <About />
       <Experience />
       <Education />
+      <Publications />
       <Certifications />
       <Projects />
       <Contact />

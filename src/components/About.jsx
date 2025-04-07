@@ -23,7 +23,8 @@ const About = () => {
     ],
     'Soft Skills': [
       'Decision Making',
-      'Problem Solving'
+      'Problem Solving',
+      'Communication'
     ]
   };
 
