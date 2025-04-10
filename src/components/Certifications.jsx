@@ -1,13 +1,41 @@
-import React from 'react';
-import { Box, Container, Typography, Paper, Grid } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Container, Typography, Paper, Grid, Button, useMediaQuery } from '@mui/material';
 import GoogleLogo from '../assets/google_logo.png';
 import { motion } from 'framer-motion';
 import { useTheme } from '@mui/material/styles';
 
 const Certifications = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [showAll, setShowAll] = useState(false);
 
   const certifications = [
+    {
+      name: 'Google Data Analytics Professional Certificate',
+      issueDate: 'April 10, 2025',
+      issuer: 'Google',
+      credentialId: '6PN1ZUPWO7W0',
+      link: 'https://www.coursera.org/account/accomplishments/professional-cert/6PN1ZUPWO7W0',
+      skills: ['Spreadsheet Software', 'Data Management', 'Data Analysis', 'Business Communication', 'General Statistics', 'Business Analysis', 'Data Visualization', 'SQL']
+    },
+    {
+      name: 'Data Analysis with R Programming',
+      issueDate: 'April 10, 2025',
+      issuer: 'Google',
+      grade: '98%',
+      credentialId: 'EGGQQ1ZNAE3I',
+      link: 'https://www.coursera.org/account/accomplishments/verify/EGGQQ1ZNAE3I',
+      skills: ['Data Analysis', 'Rstudio', 'R Markdown', 'Data Visualization', 'R Programming']
+    },
+    {
+      name: 'Share Data Through the Art of Visualization',
+      issueDate: 'April 9, 2025',
+      issuer: 'Google',
+      grade: '86.66%',
+      credentialId: 'EUEVKYHKLDHK',
+      link: 'https://www.coursera.org/account/accomplishments/verify/EUEVKYHKLDHK',
+      skills: ['Presentation', 'Data Analysis', 'Business Communication', 'Data Visualization', 'Tableau Software']
+    },
     {
       name: 'Analyze Data to Answer Questions',
       issueDate: 'February 25, 2025',
@@ -55,6 +83,22 @@ const Certifications = () => {
     }
   ];
 
+  // Calculate the number of preview certificates to show
+  const visibleCount = 6;
+  const hiddenCount = certifications.length - visibleCount;
+  
+  // Get the certificates to display based on the showAll state
+  const displayedCertificates = showAll ? certifications : certifications.slice(0, visibleCount);
+  
+  // Get the preview certificates (only if not showing all)
+  // For mobile: only show the 7th certificate as preview
+  // For desktop: show the entire next row (up to 3 certificates)
+  const previewCertificates = !showAll && hiddenCount > 0 ? 
+    isMobile ? 
+      certifications.slice(visibleCount, visibleCount + 1) : // Only show the 7th certificate on mobile
+      certifications.slice(visibleCount, visibleCount + 3) : // Show up to 3 certificates for desktop (full row)
+    [];
+
   return (
     <Box
       id="certifications"
@@ -94,7 +138,7 @@ const Certifications = () => {
           </Typography>
 
           <Grid container spacing={4}>
-            {certifications.map((cert, index) => (
+            {displayedCertificates.map((cert, index) => (
               <Grid item xs={12} md={6} lg={4} key={index}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -268,6 +312,93 @@ const Certifications = () => {
               </Grid>
             ))}
           </Grid>
+          
+          {/* Preview of hidden certificates with reduced opacity */}
+          {previewCertificates.length > 0 && (
+            <Box sx={{ mt: 4 }}>
+              <Grid container spacing={4}>
+                {previewCertificates.map((cert, index) => (
+                  <Grid item xs={12} md={6} lg={4} key={`preview-${index}`}>
+                    <motion.div
+                      initial={{ opacity: 0.3 }}
+                      animate={{ opacity: 0.3 }}
+                      style={{ filter: 'blur(2px)' }}
+                    >
+                      <Paper
+                        elevation={0}
+                        sx={{
+                          p: 4,
+                          height: '100%',
+                          borderRadius: 4,
+                          backgroundColor: theme.palette.background.paper,
+                          backdropFilter: 'blur(10px)',
+                          border: theme.palette.mode === 'dark'
+                            ? '1px solid rgba(255, 255, 255, 0.1)'
+                            : '1px solid rgba(255, 255, 255, 0.6)',
+                          boxShadow: theme.palette.mode === 'dark'
+                            ? '10px 10px 30px rgba(209,209,209,0.05), -10px -10px 30px rgba(255,255,255,0.01)'
+                            : '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
+                        }}
+                      >
+                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                          <img
+                            src={GoogleLogo}
+                            alt="Google Logo"
+                            style={{ 
+                              height: '30px', 
+                              marginRight: '16px', 
+                              objectFit: 'contain',
+                            }}
+                          />
+                          <Typography
+                            variant="h5"
+                            sx={{ fontWeight: 600, color: theme.palette.text.primary }}
+                          >
+                            {cert.name}
+                          </Typography>
+                        </Box>
+                      </Paper>
+                    </motion.div>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          )}
+          
+          {/* See More / Show Less button */}
+          {certifications.length > visibleCount && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Button
+                  variant="outlined"
+                  onClick={() => setShowAll(!showAll)}
+                  sx={{
+                    borderRadius: '50px',
+                    px: 4,
+                    py: 1,
+                    borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.2)',
+                    color: theme.palette.text.primary,
+                    backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)',
+                    '&:hover': {
+                      backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
+                      borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.3)',
+                      transform: 'translateY(-2px)',
+                      boxShadow: theme.palette.mode === 'dark' ? '0 4px 8px rgba(0,0,0,0.3)' : '0 4px 8px rgba(0,0,0,0.1)',
+                    },
+                    transition: 'all 0.3s ease-in-out',
+                    textTransform: 'none',
+                    fontWeight: 500,
+                  }}
+                >
+                  {showAll ? 'Show Less' : 'See More'}
+                </Button>
+              </motion.div>
+            </Box>
+          )}
         </motion.div>
       </Container>
     </Box>
