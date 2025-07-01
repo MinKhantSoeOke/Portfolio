@@ -3,7 +3,7 @@ import { Box, Container, Typography, Button, Grid, useMediaQuery } from '@mui/ma
 import { motion } from 'framer-motion';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import DatasetIcon from '@mui/icons-material/Dataset';
+import SchoolIcon from '@mui/icons-material/School';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import MyPhoto from '../assets/my_photo.jpg';
@@ -139,17 +139,17 @@ const Hero = () => {
                 </Button>
                 <Button
                   variant="contained"
-                  href="https://www.kaggle.com/alexminkhant"
+                  href="https://scholar.google.com/citations?hl=en&user=SSyxpPAAAAAJ"
                   target="_blank"
-                  startIcon={<DatasetIcon />}
+                  startIcon={<SchoolIcon />}
                   sx={{
-                    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.secondary.main : '#1fbeff',
+                    backgroundColor: theme.palette.mode === 'dark' ? '#4285f4' : '#4285f4',
                     '&:hover': { 
-                      backgroundColor: theme.palette.mode === 'dark' ? theme.palette.secondary.dark : '#1ca5e3' 
+                      backgroundColor: theme.palette.mode === 'dark' ? '#3367d6' : '#3367d6' 
                     },
                   }}
                 >
-                  Kaggle
+                  Google Scholar
                 </Button>
               </Box>
               <Box 
