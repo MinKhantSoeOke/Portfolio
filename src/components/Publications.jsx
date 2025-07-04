@@ -1,12 +1,35 @@
-import React from 'react';
-import { Box, Container, Typography, Paper, Grid } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Container, Typography, Paper, Grid, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useTheme } from '@mui/material/styles';
 
 const Publications = () => {
   const theme = useTheme();
+  const [expandedAbstracts, setExpandedAbstracts] = useState({});
+
+  const toggleAbstract = (index) => {
+    setExpandedAbstracts(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
+  const truncateToSentences = (text, sentenceCount = 2) => {
+    const sentences = text.match(/[^.!?]+[.!?]+/g) || [];
+    return sentences.slice(0, sentenceCount).join(' ');
+  };
 
   const publications = [
+    {
+      title: 'Cyberattack Resilience of Autonomous Vehicle Sensor Systems: Evaluating RGB vs. Dynamic Vision Sensors in CARLA',
+      authors: 'Mustafa Sakhai, Min Khant Soe Oke, Kaung Sithu, Maciej Wielgosz',
+      journal: 'Applied Sciences, 2025, 15(13), 7493',
+      year: '2025',
+      abstract: 'Autonomous vehicles (AVs) rely on a heterogeneous sensor suite of RGB cameras, LiDAR, GPS/IMU, and emerging event-based dynamic vision sensors (DVS) to perceive and navigate complex environments. However, these sensors can be deceived by realistic cyberattacks, undermining safety. In this work, we systematically implement seven attack vectors in the CARLA simulator—salt and pepper noise, event flooding, depth map tampering, LiDAR phantom injection, GPS spoofing, denial of service, and steering bias control—and measure their impact on a state-of-the-art end-to-end driving agent. We then equip each sensor with tailored defenses (e.g., adaptive median filtering for RGB and spatial clustering for DVS) and integrate a unsupervised anomaly detector (EfficientAD from anomalib) trained exclusively on benign data. Our detector achieves clear separation between normal and attacked conditions (mean RGB anomaly scores of 0.00 vs. 0.38; DVS: 0.61 vs. 0.76), yielding over 95% detection accuracy with fewer than 5% false positives. Defense evaluations reveal that GPS spoofing is fully mitigated, whereas RGB- and depth-based attacks still induce 30–45% trajectory drift despite filtering. Notably, our research-focused evaluation of DVS sensors suggests potential intrinsic resilience advantages in high-dynamic-range scenarios, though their asynchronous output necessitates carefully tuned thresholds. These findings underscore the critical role of multi-modal anomaly detection and demonstrate that DVS sensors exhibit greater intrinsic resilience in high-dynamic-range scenarios, suggesting their potential to enhance AV cybersecurity when integrated with conventional sensors.',
+      doi: '',
+      link: 'https://doi.org/10.3390/app15137493',
+      tags: ['Autonomous Vehicles', 'Cybersecurity', 'Dynamic Vision Sensors', 'CARLA'],
+    },
     {
       title: 'Evaluating Synthetic vs. Real Dynamic Vision Sensor Data for SNN-Based Object Detection Classification',
       authors: 'Mustafa Sakhai, Min Khant Soe Oke, Kaung Sithu, Szymon Mazurek, Maciej Wielgosz',
@@ -107,7 +130,54 @@ const Publications = () => {
                       variant="body1"
                       sx={{ color: theme.palette.text.primary, mb: 2, fontStyle: 'italic' }}
                     >
-                      {publication.abstract}
+                      {expandedAbstracts[index] 
+                        ? publication.abstract 
+                        : `${truncateToSentences(publication.abstract)} `}
+                      {!expandedAbstracts[index] && publication.abstract.length > truncateToSentences(publication.abstract).length && (
+                        <Button
+                          variant="text"
+                          size="small"
+                          onClick={() => toggleAbstract(index)}
+                          sx={{
+                            p: 0,
+                            minWidth: 'auto',
+                            color: theme.palette.primary.main,
+                            textTransform: 'none',
+                            fontSize: 'inherit',
+                            fontStyle: 'normal',
+                            verticalAlign: 'baseline',
+                            '&:hover': {
+                              backgroundColor: 'transparent',
+                              textDecoration: 'underline'
+                            }
+                          }}
+                        >
+                          See more
+                        </Button>
+                      )}
+                      {expandedAbstracts[index] && (
+                        <Button
+                          variant="text"
+                          size="small"
+                          onClick={() => toggleAbstract(index)}
+                          sx={{
+                            ml: 1,
+                            p: 0,
+                            minWidth: 'auto',
+                            color: theme.palette.primary.main,
+                            textTransform: 'none',
+                            fontSize: 'inherit',
+                            fontStyle: 'normal',
+                            verticalAlign: 'baseline',
+                            '&:hover': {
+                              backgroundColor: 'transparent',
+                              textDecoration: 'underline'
+                            }
+                          }}
+                        >
+                          See less
+                        </Button>
+                      )}
                     </Typography>
                     
                     {publication.link && (
