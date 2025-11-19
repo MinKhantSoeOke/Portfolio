@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Box, Container, Typography, Paper, Grid, Button, useMediaQuery } from '@mui/material';
+import { Box, Container, Typography, Paper, Grid, Button, Collapse } from '@mui/material';
 import GoogleLogo from '../assets/google_logo.png';
 import { motion } from 'framer-motion';
 import { useTheme } from '@mui/material/styles';
 
 const Certifications = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const [showAll, setShowAll] = useState(false);
+  const [showSpecializations, setShowSpecializations] = useState(false);
 
   const certifications = [
     {
@@ -83,21 +82,178 @@ const Certifications = () => {
     }
   ];
 
-  // Calculate the number of preview certificates to show
-  const visibleCount = 6;
-  const hiddenCount = certifications.length - visibleCount;
-  
-  // Get the certificates to display based on the showAll state
-  const displayedCertificates = showAll ? certifications : certifications.slice(0, visibleCount);
-  
-  // Get the preview certificates (only if not showing all)
-  // For mobile: only show the 7th certificate as preview
-  // For desktop: show the entire next row (up to 3 certificates)
-  const previewCertificates = !showAll && hiddenCount > 0 ? 
-    isMobile ? 
-      certifications.slice(visibleCount, visibleCount + 1) : // Only show the 7th certificate on mobile
-      certifications.slice(visibleCount, visibleCount + 3) : // Show up to 3 certificates for desktop (full row)
-    [];
+  const [primaryCertification, ...subCertifications] = certifications;
+
+  if (!primaryCertification) {
+    return null;
+  }
+
+  const renderCertificateCard = (cert, highlight = false) => (
+    <Paper
+      elevation={0}
+      sx={{
+        p: highlight ? 5 : 4,
+        height: '100%',
+        borderRadius: highlight ? 5 : 4,
+        backgroundColor: theme.palette.background.paper,
+        backdropFilter: 'blur(10px)',
+        border: theme.palette.mode === 'dark'
+          ? '1px solid rgba(255, 255, 255, 0.1)'
+          : '1px solid rgba(255, 255, 255, 0.6)',
+        boxShadow: theme.palette.mode === 'dark'
+          ? '10px 10px 30px rgba(209,209,209,0.05), -10px -10px 30px rgba(255,255,255,0.01)'
+          : '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
+        transition: 'transform 0.3s ease-in-out',
+        '&:hover': {
+          transform: 'translateY(-5px)'
+        }
+      }}
+    >
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+        <motion.img
+          src={GoogleLogo}
+          alt="Google Logo"
+          whileHover={{ 
+            scale: 1.1,
+            rotate: 5,
+            filter: 'drop-shadow(0 8px 8px rgba(0,0,0,0.2))'
+          }}
+          transition={{ 
+            type: 'spring',
+            stiffness: 300,
+            damping: 15
+          }}
+          style={{ 
+            height: highlight ? '36px' : '30px', 
+            marginRight: '16px', 
+            objectFit: 'contain',
+            cursor: 'pointer'
+          }}
+        />
+        <Typography
+          variant={highlight ? 'h4' : 'h5'}
+          sx={{ fontWeight: 600, color: theme.palette.text.primary }}
+        >
+          {cert.name}
+        </Typography>
+      </Box>
+      <Typography
+        variant="subtitle1"
+        sx={{ color: theme.palette.text.secondary, mb: 1 }}
+      >
+        {cert.issuer}
+      </Typography>
+      <Typography
+        variant="body2"
+        sx={{ color: theme.palette.text.secondary, mb: 2 }}
+      >
+        Issued: {cert.issueDate}
+      </Typography>
+      {cert.grade && (
+        <Typography
+          variant="body1"
+          sx={{ color: theme.palette.text.primary, mb: 1 }}
+        >
+          Grade: {cert.grade}
+        </Typography>
+      )}
+      <Typography
+        variant="body2"
+        sx={{ color: theme.palette.text.secondary, mb: 2 }}
+      >
+        Credential ID: {cert.credentialId}
+      </Typography>
+      {cert.link && (
+        <Box sx={{ mb: 2 }}>
+          <Paper
+            component="button"
+            elevation={0}
+            sx={{
+              px: 1.5,
+              py: 0.5,
+              border: 'none',
+              borderRadius: '50px',
+              cursor: 'pointer',
+              background: 'rgba(26, 115, 232, 0.1)',
+              color: '#1a73e8',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '4px',
+              minWidth: '80px',
+              transition: 'all 0.3s ease-in-out',
+              '&:hover': {
+                transform: 'translateY(-2px)',
+                background: 'rgba(26, 115, 232, 0.15)',
+                boxShadow: '0 4px 8px rgba(26, 115, 232, 0.15)'
+              },
+              '&:active': {
+                transform: 'translateY(0)',
+                boxShadow: '0 2px 4px rgba(26, 115, 232, 0.1)'
+              }
+            }}
+            onClick={() => window.open(cert.link, '_blank')}
+          >
+            <Typography variant="body2" sx={{ fontWeight: 500, letterSpacing: '0.5px' }}>
+              VERIFY
+            </Typography>
+            <Box
+              component="span"
+              sx={{
+                display: 'inline-block',
+                width: '8px',
+                height: '8px',
+                borderTop: '1.25px solid currentColor',
+                borderRight: '1.25px solid currentColor',
+                transform: 'rotate(45deg)',
+                position: 'relative',
+                top: '-1px',
+                ml: 1
+              }}
+            />
+          </Paper>
+        </Box>
+      )}
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+        {cert.skills.map((skill, i) => (
+          <motion.div
+            key={`${cert.name}-skill-${i}`}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, delay: i * 0.1 }}
+            viewport={{ once: true }}
+          >
+            <Paper
+              elevation={0}
+              sx={{
+                px: 2,
+                py: 1,
+                borderRadius: 2,
+                backgroundColor: theme.palette.mode === 'dark'
+                  ? 'rgba(255, 255, 255, 0.08)'
+                  : 'rgba(0, 0, 0, 0.04)',
+                color: theme.palette.text.secondary,
+                transition: 'all 0.3s ease-in-out',
+                '&:hover': {
+                  backgroundColor: theme.palette.mode === 'dark'
+                    ? 'rgba(255, 255, 255, 0.15)'
+                    : 'rgba(0, 0, 0, 0.08)',
+                  transform: 'translateY(-2px)',
+                  boxShadow: theme.palette.mode === 'dark'
+                    ? '0 4px 8px rgba(0,0,0,0.3)'
+                    : '0 4px 8px rgba(0,0,0,0.1)',
+                },
+              }}
+            >
+              <Typography variant="body2">
+                {skill}
+              </Typography>
+            </Paper>
+          </motion.div>
+        ))}
+      </Box>
+    </Paper>
+  );
 
   return (
     <Box
@@ -137,268 +293,78 @@ const Certifications = () => {
             Certifications
           </Typography>
 
-          <Grid container spacing={4}>
-            {displayedCertificates.map((cert, index) => (
-              <Grid item xs={12} md={6} lg={4} key={index}>
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  viewport={{ once: true }}
+          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 6 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              style={{ width: '100%', maxWidth: 900 }}
+            >
+              {renderCertificateCard(primaryCertification, true)}
+            </motion.div>
+          </Box>
+
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Button
+                variant="outlined"
+                onClick={() => setShowSpecializations(!showSpecializations)}
+                sx={{
+                  borderRadius: '50px',
+                  px: 4,
+                  py: 1,
+                  borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.2)',
+                  color: theme.palette.text.primary,
+                  backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)',
+                  '&:hover': {
+                    backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
+                    borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.3)',
+                    transform: 'translateY(-2px)',
+                    boxShadow: theme.palette.mode === 'dark' ? '0 4px 8px rgba(0,0,0,0.3)' : '0 4px 8px rgba(0,0,0,0.1)',
+                  },
+                  transition: 'all 0.3s ease-in-out',
+                  textTransform: 'none',
+                  fontWeight: 500,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1.5,
+                }}
+              >
+                {showSpecializations ? 'Hide specialization certificates' : 'Show specialization certificates'}
+                <motion.span
+                  animate={{ rotate: showSpecializations ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ display: 'inline-block' }}
                 >
-                  <Paper
-                    elevation={0}
-                    sx={{
-                      p: 4,
-                      height: '100%',
-                      borderRadius: 4,
-                      backgroundColor: theme.palette.background.paper,
-                      backdropFilter: 'blur(10px)',
-                      border: theme.palette.mode === 'dark'
-                        ? '1px solid rgba(255, 255, 255, 0.1)'
-                        : '1px solid rgba(255, 255, 255, 0.6)',
-                      boxShadow: theme.palette.mode === 'dark'
-                        ? '10px 10px 30px rgba(209,209,209,0.05), -10px -10px 30px rgba(255,255,255,0.01)'
-                        : '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
-                      transition: 'transform 0.3s ease-in-out',
-                      '&:hover': {
-                        transform: 'translateY(-5px)'
-                      }
-                    }}
-                  >
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                      <motion.img
-                        src={GoogleLogo}
-                        alt="Google Logo"
-                        whileHover={{ 
-                          scale: 1.1,
-                          rotate: 5,
-                          filter: 'drop-shadow(0 8px 8px rgba(0,0,0,0.2))'
-                        }}
-                        transition={{ 
-                          type: 'spring',
-                          stiffness: 300,
-                          damping: 15
-                        }}
-                        style={{ 
-                          height: '30px', 
-                          marginRight: '16px', 
-                          objectFit: 'contain',
-                          cursor: 'pointer'
-                        }}
-                      />
-                      <Typography
-                        variant="h5"
-                        sx={{ fontWeight: 600, color: theme.palette.text.primary }}
-                      >
-                        {cert.name}
-                      </Typography>
-                    </Box>
-                    <Typography
-                      variant="subtitle1"
-                      sx={{ color: theme.palette.text.secondary, mb: 1 }}
-                    >
-                      {cert.issuer}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: theme.palette.text.secondary, mb: 2 }}
-                    >
-                      Issued: {cert.issueDate}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      sx={{ color: theme.palette.text.primary, mb: 1 }}
-                    >
-                      Grade: {cert.grade}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: theme.palette.text.secondary, mb: 2 }}
-                    >
-                      Credential ID: {cert.credentialId}
-                    </Typography>
-                    {cert.credentialId && (
-                      <Box sx={{ mb: 2 }}>
-                        <Paper
-                          component="button"
-                          elevation={0}
-                          sx={{
-                            px: 1.5,
-                            py: 0.5,
-                            border: 'none',
-                            borderRadius: '50px',
-                            cursor: 'pointer',
-                            background: 'rgba(26, 115, 232, 0.1)',
-                            color: '#1a73e8',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '4px',
-                            minWidth: '80px',
-                            transition: 'all 0.3s ease-in-out',
-                            '&:hover': {
-                              transform: 'translateY(-2px)',
-                              background: 'rgba(26, 115, 232, 0.15)',
-                              boxShadow: '0 4px 8px rgba(26, 115, 232, 0.15)'
-                            },
-                            '&:active': {
-                              transform: 'translateY(0)',
-                              boxShadow: '0 2px 4px rgba(26, 115, 232, 0.1)'
-                            }
-                          }}
-                          onClick={() => window.open(cert.link, '_blank')}
-                        >
-                          <Typography variant="body2" sx={{ fontWeight: 500, letterSpacing: '0.5px' }}>
-                            VERIFY
-                          </Typography>
-                          <Box
-                            component="span"
-                            sx={{
-                              display: 'inline-block',
-                              width: '8px',
-                              height: '8px',
-                              borderTop: '1.25px solid currentColor',
-                              borderRight: '1.25px solid currentColor',
-                              transform: 'rotate(45deg)',
-                              position: 'relative',
-                              top: '-1px',
-                              ml: 1
-                            }}
-                          />
-                        </Paper>
-                      </Box>
-                    )}
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                      {cert.skills.map((skill, i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.3, delay: i * 0.1 }}
-                          viewport={{ once: true }}
-                        >
-                          <Paper
-                            elevation={0}
-                            sx={{
-                              px: 2,
-                              py: 1,
-                              borderRadius: 2,
-                              backgroundColor: theme.palette.mode === 'dark'
-                                ? 'rgba(255, 255, 255, 0.08)'
-                                : 'rgba(0, 0, 0, 0.04)',
-                              color: theme.palette.text.secondary,
-                              transition: 'all 0.3s ease-in-out',
-                              '&:hover': {
-                                backgroundColor: theme.palette.mode === 'dark'
-                                  ? 'rgba(255, 255, 255, 0.15)'
-                                  : 'rgba(0, 0, 0, 0.08)',
-                                transform: 'translateY(-2px)',
-                                boxShadow: theme.palette.mode === 'dark'
-                                  ? '0 4px 8px rgba(0,0,0,0.3)'
-                                  : '0 4px 8px rgba(0,0,0,0.1)',
-                              },
-                            }}
-                          >
-                            <Typography variant="body2">
-                              {skill}
-                            </Typography>
-                          </Paper>
-                        </motion.div>
-                      ))}
-                    </Box>
-                  </Paper>
-                </motion.div>
-              </Grid>
-            ))}
-          </Grid>
-          
-          {/* Preview of hidden certificates with reduced opacity */}
-          {previewCertificates.length > 0 && (
-            <Box sx={{ mt: 4 }}>
+                  v
+                </motion.span>
+              </Button>
+            </motion.div>
+          </Box>
+
+          <Collapse in={showSpecializations} timeout={400}>
+            <Box sx={{ mt: 6 }}>
               <Grid container spacing={4}>
-                {previewCertificates.map((cert, index) => (
-                  <Grid item xs={12} md={6} lg={4} key={`preview-${index}`}>
+                {subCertifications.map((cert, index) => (
+                  <Grid item xs={12} md={6} lg={4} key={`sub-cert-${cert.credentialId}`}>
                     <motion.div
-                      initial={{ opacity: 0.3 }}
-                      animate={{ opacity: 0.3 }}
-                      style={{ filter: 'blur(2px)' }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                      viewport={{ once: true }}
                     >
-                      <Paper
-                        elevation={0}
-                        sx={{
-                          p: 4,
-                          height: '100%',
-                          borderRadius: 4,
-                          backgroundColor: theme.palette.background.paper,
-                          backdropFilter: 'blur(10px)',
-                          border: theme.palette.mode === 'dark'
-                            ? '1px solid rgba(255, 255, 255, 0.1)'
-                            : '1px solid rgba(255, 255, 255, 0.6)',
-                          boxShadow: theme.palette.mode === 'dark'
-                            ? '10px 10px 30px rgba(209,209,209,0.05), -10px -10px 30px rgba(255,255,255,0.01)'
-                            : '10px 10px 30px #d1d1d1, -10px -10px 30px #ffffff',
-                        }}
-                      >
-                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                          <img
-                            src={GoogleLogo}
-                            alt="Google Logo"
-                            style={{ 
-                              height: '30px', 
-                              marginRight: '16px', 
-                              objectFit: 'contain',
-                            }}
-                          />
-                          <Typography
-                            variant="h5"
-                            sx={{ fontWeight: 600, color: theme.palette.text.primary }}
-                          >
-                            {cert.name}
-                          </Typography>
-                        </Box>
-                      </Paper>
+                      {renderCertificateCard(cert)}
                     </motion.div>
                   </Grid>
                 ))}
               </Grid>
             </Box>
-          )}
-          
-          {/* See More / Show Less button */}
-          {certifications.length > visibleCount && (
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Button
-                  variant="outlined"
-                  onClick={() => setShowAll(!showAll)}
-                  sx={{
-                    borderRadius: '50px',
-                    px: 4,
-                    py: 1,
-                    borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.2)',
-                    color: theme.palette.text.primary,
-                    backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)',
-                    '&:hover': {
-                      backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
-                      borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.3)',
-                      transform: 'translateY(-2px)',
-                      boxShadow: theme.palette.mode === 'dark' ? '0 4px 8px rgba(0,0,0,0.3)' : '0 4px 8px rgba(0,0,0,0.1)',
-                    },
-                    transition: 'all 0.3s ease-in-out',
-                    textTransform: 'none',
-                    fontWeight: 500,
-                  }}
-                >
-                  {showAll ? 'Show Less' : 'See More'}
-                </Button>
-              </motion.div>
-            </Box>
-          )}
+          </Collapse>
         </motion.div>
       </Container>
     </Box>
