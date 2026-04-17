@@ -6,25 +6,25 @@ import { useTheme } from '@mui/material/styles';
 const About = () => {
   const theme = useTheme();
   const skills = {
-    'Data Science': [
-      'Machine Learning',
-      'Data Analysis',
-      'Data Modeling',
-      'Data Visualization',
-      'Data Cleaning',
-      'Data Collection',
-      'Spiking Neural Network'
+    'AI & System Architecture': [
+      'Agentic Workflows',
+      'MCP',
+      'Hybrid RAG',
+      'FastAPI',
+      'Keycloak',
+      'RBAC'
     ],
-    'Tools & Technologies': [
-      'Python (NumPy, Pandas, TensorFlow)',
-      'Database (SQL, BigQuery)',
-      'Google Sheets',
-      'Excel'
+    'Intelligence & Strategy': [
+      'Python',
+      'TensorFlow',
+      'Data Lifecycle Management',
+      'Advanced Visualization',
+      'Strategic Data Reporting'
     ],
     'Soft Skills': [
-      'Decision Making',
-      'Problem Solving',
-      'Communication'
+      'Complex Problem Solving',
+      'Technical Communication',
+      'Cross-functional Collaboration'
     ]
   };
 
@@ -115,7 +115,7 @@ const About = () => {
                           mb: 2,
                         }}
                       >
-                        Freshly graduated with a Bachelor of Science in Computer Science, eager to start a career as a Data Analyst. Proficient in Python, SQL, and Data Visualization tools like Tableau and Matplotlib, with a strong foundation in data cleaning, statistical analysis, and creating actionable insights.
+                        AI Systems Architect & Backend Developer I architect secure agentic workflows and high-concurrency backend ecosystems. Specializing in modular AI integration via Model Context Protocol (MCP) and Hybrid RAG pipelines, I bridge the gap between Machine Learning research and enterprise-grade performance.
                       </Typography>
                       <Typography
                         variant="body1"
@@ -125,7 +125,7 @@ const About = () => {
                           color: theme.palette.text.secondary,
                         }}
                       >
-                        Passionate about transforming complex datasets into clear, actionable insights that support informed decision-making.
+                        My work focuses on enhancing system resilience and operational efficiency through strategic, data-driven architecture.
                       </Typography>
                     </Paper>
                   </motion.div>

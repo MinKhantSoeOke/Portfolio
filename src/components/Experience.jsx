@@ -9,9 +9,20 @@ const Experience = () => {
 
   const experiences = [
     {
+      title: 'Software Backend Developer',
+      company: 'CyberSecurity Startup',
+      period: 'May, 2025 - Present',
+      achievements: [
+        'Spearheaded the development of a high-concurrency backend ecosystem using FastAPI, focusing on asynchronous processing and optimized API performance to support high-traffic cybersecurity workloads.',
+        'Orchestrated enterprise IAM solutions by deploying Keycloak, designing granular Role-Based Access Control (RBAC) policies that ensured strict data multi-tenancy and zero-trust security principles.',
+        'Built a modular extensibility layer based on the Model Context Protocol (MCP), allowing for the seamless integration of third-party tools and rapid deployment of new backend functionalities without core system downtime.',
+        'Optimized a Hybrid RAG (Retrieval-Augmented Generation) pipeline, integrating vector databases with structured data sources to deliver high-precision, low-latency context for AI-driven security analysis.'
+      ]
+    },
+    {
       title: 'Machine Learning Research (Intern)',
       company: 'AGH University of Science and Technology',
-      period: 'June, 2024 - Present',
+      period: 'June, 2024 - February, 2026',
       achievements: [
         'Developed cutting-edge algorithms that enhanced dataset quality for autonomous driving models, leading to a 15% increase in model performance accuracy and reducing error rates by 20%.',
         'Collaborated with the Machine Learning team to optimize Python scripts for data engineering processes, resulting in a 30% decrease in runtime and improving overall efficiency.',

@@ -86,7 +86,7 @@ const Hero = () => {
                   textAlign: { xs: 'center', md: 'left' },
                 }}
               >
-                Data Analyst & Machine Learning Enthusiast
+                AI Systems Architect & Backend Developer
               </Typography>
               <Typography
                 variant="body1"
@@ -100,7 +100,7 @@ const Hero = () => {
                   mx: { xs: 'auto', md: 0 },
                 }}
               >
-                Fresh Computer Science graduate with a passion for transforming data into actionable insights. Specialized in data analysis, machine learning, and creating impactful visualizations.
+                I design and orchestrate secure agentic workflows and high-concurrency backend ecosystems. Specialized in building modular AI integrations via the Model Context Protocol (MCP) and optimizing Hybrid RAG pipelines for enterprise-grade performance.
               </Typography>
               <Box 
                 sx={{ 
