@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Container, Typography, Paper, Grid } from '@mui/material';
 import { motion } from 'framer-motion';
 import AGHLogo from '../assets/AGH_logo.png';
@@ -10,13 +9,18 @@ const Experience = () => {
   const experiences = [
     {
       title: 'Software Backend Developer',
-      company: 'CyberSecurity Startup',
+      company: 'CyfroSec',
+      location: 'Krakow, Poland 🇵🇱',
       period: 'May, 2025 - Present',
+      summary: 'Develop secure, high-concurrency backend and AI systems for a remote cybersecurity startup.',
+      video: {
+        src: 'https://www.youtube-nocookie.com/embed/FMmvLzTQN5w',
+        title: 'CyfroSec product showcase'
+      },
       achievements: [
-        'Spearheaded the development of a high-concurrency backend ecosystem using FastAPI, focusing on asynchronous processing and optimized API performance to support high-traffic cybersecurity workloads.',
-        'Orchestrated enterprise IAM solutions by deploying Keycloak, designing granular Role-Based Access Control (RBAC) policies that ensured strict data multi-tenancy and zero-trust security principles.',
-        'Built a modular extensibility layer based on the Model Context Protocol (MCP), allowing for the seamless integration of third-party tools and rapid deployment of new backend functionalities without core system downtime.',
-        'Optimized a Hybrid RAG (Retrieval-Augmented Generation) pipeline, integrating vector databases with structured data sources to deliver high-precision, low-latency context for AI-driven security analysis.'
+        'Developed high-concurrency FastAPI backends integrated with Keycloak IAM and RBAC policies to support zero-trust security for high-traffic workloads.',
+        'Architected a modular extensibility layer (MCP) for third-party tool integration and rapid feature deployment without core-system downtime.',
+        'Optimized Hybrid RAG pipelines using vector databases and structured data to deliver high-precision, low-latency context for AI security analysis.'
       ]
     },
     {
@@ -160,7 +164,7 @@ const Experience = () => {
                           variant="h6"
                           sx={{ color: theme.palette.text.secondary, mb: 1 }}
                         >
-                          {exp.company} {exp.company === 'AGH University of Science and Technology' ? '• Krakow, Poland 🇵🇱' : '• Remote 🌐'}
+                          {exp.company} • {exp.location || (exp.company === 'AGH University of Science and Technology' ? 'Krakow, Poland 🇵🇱' : 'Remote 🌐')}
                         </Typography>
                         <Typography
                           variant="subtitle1"
@@ -170,6 +174,18 @@ const Experience = () => {
                         </Typography>
                       </Box>
                     </Box>
+                    {exp.summary && (
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          color: theme.palette.text.primary,
+                          mb: 2,
+                          lineHeight: 1.7
+                        }}
+                      >
+                        {exp.summary}
+                      </Typography>
+                    )}
                     <Box component="ul" sx={{ m: 0, pl: 2 }}>
                       {exp.achievements.map((achievement, i) => (
                         <Typography
@@ -187,6 +203,37 @@ const Experience = () => {
                         </Typography>
                       ))}
                     </Box>
+                    {exp.video && (
+                      <Box
+                        sx={{
+                          mt: 3,
+                          width: '100%',
+                          aspectRatio: '16 / 9',
+                          borderRadius: 2,
+                          overflow: 'hidden',
+                          backgroundColor: '#000000',
+                          boxShadow: theme.palette.mode === 'dark'
+                            ? '0 12px 30px rgba(0, 0, 0, 0.35)'
+                            : '0 12px 30px rgba(0, 0, 0, 0.16)'
+                        }}
+                      >
+                        <Box
+                          component="iframe"
+                          src={exp.video.src}
+                          title={exp.video.title}
+                          loading="lazy"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          referrerPolicy="strict-origin-when-cross-origin"
+                          allowFullScreen
+                          sx={{
+                            display: 'block',
+                            width: '100%',
+                            height: '100%',
+                            border: 0
+                          }}
+                        />
+                      </Box>
+                    )}
                   </Paper>
                 </motion.div>
               </Grid>
